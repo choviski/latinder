@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Mensagem extends Model
 {
-    protected $table ="mensagem";
-    protected $fillable = ['conteudo','id_remetente','id_detinatario'];
+    protected $table ="mensagems";
+    protected $fillable = ['conteudo','id_remetente','id_destinatario'];
     use SoftDeletes;
 }

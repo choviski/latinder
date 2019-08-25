@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Usuario extends Model
 {
-    protected $table ="usuario";
-    protected $fillable = ['nome','login','email','senha','foto'];
+    protected $table ="usuarios";
+    protected $fillable = ['nome','login','email','senha','imagem'];
     use SoftDeletes;
 }

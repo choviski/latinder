@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cidade extends Model
 {
-    protected $table ="cidade";
+    protected $table ="cidades";
     protected $fillable = ['nome','estado'];
     use SoftDeletes;
 }
