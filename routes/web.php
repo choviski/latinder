@@ -20,3 +20,5 @@ Route::resource('/mensagem', 'MensagemController' , ['except' => 'destroy']);
 Route::delete('/mensagem/remover/{id}', "MensagemController@destroy");
 Route::resource("/cidade","CidadeController",['except'=>'destroy']);
 Route::delete('/mensagem/remover/{id}', "CidadeController@destroy");
+Route::resource("/endereco", "EnderecoController",["except"=>"destroy"]);
+Route::delete('/endereco/remover/{id}', "EnderecoController@destroy");
