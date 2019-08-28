@@ -20,6 +20,7 @@ class CreateEnderecosTable extends Migration
             $table->string("complemento");
             $table->bigInteger("cep");
             $table->bigInteger("id_cidade");
+            $table->softDeletes();
             $table->timestamps();
         });
     }
