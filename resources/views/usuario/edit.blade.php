@@ -1,4 +1,4 @@
-@extends('../layout')
+@extends('../layouts/cruds')
 
 @section('header')
     <h1 class="display-4">EDITAR USUARIO</h1>
