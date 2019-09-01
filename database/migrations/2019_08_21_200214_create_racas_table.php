@@ -13,7 +13,7 @@ class CreateRacasTable extends Migration
      */
     public function up()
     {
-        Schema::create('racas', function (Blueprint $table) {
+        Schema::create('raca', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("nome");
             $table->bigInteger("id_especies");
@@ -29,6 +29,6 @@ class CreateRacasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('racas');
+        Schema::dropIfExists('raca');
     }
 }
