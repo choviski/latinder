@@ -1,27 +1,25 @@
-
-@extends('../layouts/cruds')
-
+@extends('../layouts.cruds')
 
 @section('header')
-    <h1 class="display-4">USUÁRIOS</h1>
+    <h1 class="display-4">ANIMAL</h1>
 @endsection
 
 @section('content')<ul class="list-group">
     <ul class="list-group">
-        @foreach($usuarios as $usuario)
+        @foreach($animais as $animal)
 
-            <li class="list-group-item align-items-center d-flex justify-content-between">ID #{{$usuario->id}} |
-                Nome: {{$usuario->nome}}
+            <li class="list-group-item align-items-center d-flex justify-content-between">ID #{{$animal->id}} |
+                Nome: {{$animal->nome}}
                 <span class="d-flex">
-                    <form method="get" action="/usuario/{{$usuario->id}}">
+                    <form method="get" action="/animal/{{$animal->id}}">
                         @csrf
                          <button class="btn btn-secondary mr-1"> <i class="fas fa-eye"></i></button>
                     </form>
-                <form method="get" action="/usuario/{{$usuario->id}}/edit/">
+                <form method="get" action="/animal/{{$animal->id}}/edit/">
                     @csrf
                     <button class="btn btn-info mr-1"> <i class="far fa-edit"></i> </button>
                 </form>
-                <form method="post" action="/usuario/remover/{{$usuario->id}}" onsubmit="return confirm('Tem certeza que deseja excluir {{$usuario->nome}} ?')">
+                <form method="post" action="/endereco/remover/{{$animal->id}}" onsubmit="return confirm('Tem certeza que deseja excluir {{$animal->nome}} ?')">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
@@ -30,7 +28,7 @@
             </li>
         @endforeach
     </ul>
-    <form method="get" action="{{route("usuario.create")}}">
+    <form method="get" action="{{route("animal.create")}}">
         @csrf
         <button class="btn btn btn-outline-primary mt-2 ">Adicionar</button>
     </form>
