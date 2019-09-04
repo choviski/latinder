@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Especie extends Model
 {
-    protected $table ="especie";
+    protected $table ="especies";
     protected $fillable = ['nome'];
     use SoftDeletes;
 }

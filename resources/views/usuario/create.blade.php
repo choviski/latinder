@@ -1,4 +1,9 @@
+
+@section('header')
+    <h1 class="display-4">CADASTRO DE USUÁRIO</h1>
+@endsection
 @extends(".layouts.iniciais")
+
 
 @section('content')
     <div class=" p-2 bg-light rounded shadow text-center">
