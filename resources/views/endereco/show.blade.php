@@ -1,4 +1,4 @@
-@extends('../layout')
+@extends('../layouts.cruds')
 
 @section('header')
     <h1 class="display-4">{{$endereco->rua}}</h1>
@@ -6,7 +6,7 @@
 
 @section('content')
     <table class="table bg-light rounded">
-        <thead style="background-color:lightgreen">
+        <thead style="background-color:lightskyblue">
         <tr>
             <th scope="col">ID</th>
             <th scope="col">RUA</th>

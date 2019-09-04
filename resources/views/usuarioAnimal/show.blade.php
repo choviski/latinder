@@ -1,12 +1,12 @@
-@extends('../layout')
+@extends('../layouts.cruds')
 
 @section('header')
-    <h1 class="display-4">{{$usuario->id_usuario}}</h1>
+    <h1 class="display-4">{{$usuario->id_usuarios}}</h1>
 @endsection
 
 @section('content')
     <table class="table bg-light rounded">
-        <thead style="background-color:lightgreen">
+        <thead style="background-color:lightskyblue">
         <tr>
             <th scope="col">ID</th>
             <th scope="col">ID_USUARIO</th>

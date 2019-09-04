@@ -1,4 +1,4 @@
-@extends('../layout')
+@extends('../layouts.cruds')
 
 @section('header')
     <h1 class="display-4">CADASTRO DE ENDEREÇO</h1>

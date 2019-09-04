@@ -1,4 +1,4 @@
-@extends('../layout')
+@extends('../layouts.cruds')
 
 @section('header')
     <h1 class="display-4">ANIMAL</h1>
@@ -30,6 +30,6 @@
     </ul>
     <form method="get" action="{{route("animal.create")}}">
         @csrf
-        <button class="btn btn btn-success mt-2 ">Adicionar</button>
+        <button class="btn btn btn-outline-primary mt-2 ">Adicionar</button>
     </form>
 @endsection

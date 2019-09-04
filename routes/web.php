@@ -19,8 +19,6 @@ Route::resource("/comentario","ComentarioController",['except'=>'destroy']);
 Route::delete('/comentario/remover/{id}', "ComentarioController@destroy");
 
 
-
-Route::delete('/mensagem/remover/{id}', "CidadeController@destroy");
 Route::resource("/endereco", "EnderecoController",["except"=>"destroy"]);
 Route::delete('/endereco/remover/{id}', "EnderecoController@destroy");
 Route::resource("/usuarioAnimal", "UsuarioAnimalController",["except"=>"destroy"]);
