@@ -1,16 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::resource('/usuario', 'UsuarioController' , ['except' => 'destroy']);
 Route::delete('/usuario/remover/{id}', "UsuarioController@destroy");
 Route::resource('/mensagem', 'MensagemController' , ['except' => 'destroy']);
@@ -19,16 +7,14 @@ Route::resource("/cidade","CidadeController",['except'=>'destroy']);
 Route::delete('/mensagem/remover/{id}', "CidadeController@destroy");
 Route::resource("/endereco", "EnderecoController",["except"=>"destroy"]);
 Route::delete('/endereco/remover/{id}', "EnderecoController@destroy");
+Route::resource("/usuarioAnimal", "UsuarioAnimalController",["except"=>"destroy"]);
+Route::delete('/usuarioAnimal/remover/{id}', "UsuarioAnimalController@destroy");
+Route::resource("/animal", "AnimalController",["except"=>"destroy"]);
+Route::delete('/animal/remover/{id}', "AnimalController@destroy");
+Route::post('/login','LoginController@entrar');
 
 
-
-
-
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "LoginController@index")->name("inicio");
 
 Route::get('/cadastro', function () {
     return view('cadastro');

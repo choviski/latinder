@@ -1,33 +1,19 @@
-@extends('../layout')
-
-@section('header')
-    <h1 class="display-4">CADASTRO DE USUÁRIO</h1>
-@endsection
+@extends(".layouts.iniciais")
 
 @section('content')
-    <form  action="{{Route('usuario.store')}}" method="post">
-        @csrf
-        <div class="form-group bg-light p-2 rounded">
-            <label  for="nome">Nome:</label>
-            <input type="text" class="form-control" id="nome" placeholder="insira o seu nome" name="nome" required>
+    <div class=" p-2 bg-light rounded shadow text-center">
+        <form action="{{route("usuario.store")}}" method="post" class="form-group ">
+            @csrf
+            <input type="text" name="nome" class="form-control mt-2" placeholder="Nome" required>
+            <input type="text" name="login" class="form-control mt-2" placeholder="Login" required>
+            <input type="text" name="email" class="form-control mt-2" placeholder="E-mail" required>
+            <input type="text" name="senha" class="form-control mt-2" placeholder="Senha" required>
+            <input type="file" name="imagem" class="form-control mt-2" placeholder="Foto" required>
 
-            <label  for="login">Login:</label>
-            <input type="text" class="form-control" id="login" placeholder="insira o login" name="login" required>
+            <input type="submit" value="Cadastrar" class="btn-block btn-primary rounded mt-2">
 
+        </form>
+        <a href="/">Voltar</a>
 
-            <label for="email">E-mail:</label>
-            <input type="email" class="form-control" id="email" placeholder="insira o e-mail" name="email" required>
-
-            <label  for="senha">Senha:</label>
-            <input type="password" class="form-control" id="senha" placeholder="insira a senha" name="senha" required>
-
-            <label  for="img">Foto:</label>
-            <input type="file" class="form-control" id="img" placeholder="insira a sua foto" name="imagem" required>
-
-            <input type="submit" class="btn btn-primary mt-2">
-
-        </div>
-    </form>
-
-
+    </div>
 @endsection
