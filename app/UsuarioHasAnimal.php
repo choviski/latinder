@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UsuarioHasAnimal extends Model
 {
-    protected $table ="usuariohasanimal";
+    protected $table ="usuario_has_animals";
     protected $fillable = ['id_usuarios','id_animais'];
     use SoftDeletes;
 }

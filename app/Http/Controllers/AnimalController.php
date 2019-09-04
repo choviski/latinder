@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Usuario;
+
+use App\Animal;
 use Illuminate\Http\Request;
 
-class UsuarioController extends Controller
+class AnimalController extends Controller
 {
-
     public function index()
     {
-        $usuarios = Usuario::all();
-        return view("usuario.index")->with(["usuarios" => $usuarios]);
+        $animais = Animal::all();
+        return view("animal.index")->with(["animais" => $animais]);
     }
 
     /**
@@ -20,7 +20,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view("usuario.create");
+        return view("animal.create");
     }
 
     /**
@@ -31,8 +31,8 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-      Usuario:: create($request->all());
-      return redirect()->route("inicio");
+        Animal:: create($request->all());
+        return redirect()->route("animal.index");
     }
 
     /**
@@ -43,8 +43,8 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        $usuarios=Usuario::find($id);
-        return view('usuario.show')->with(["usuario"=>$usuarios]);
+        $animal=Animal::find($id);
+        return view('animal.show')->with(["animal"=>$animal]);
     }
 
     /**
@@ -55,8 +55,8 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        $usuarios=Usuario::find($id);
-        return view('usuario.edit')->with(["usuario"=>$usuarios]);
+        $animal=Animal::find($id);
+        return view('animal.edit')->with(["animal"=>$animal]);
     }
 
     /**
@@ -68,8 +68,8 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Usuario::find($id)->update($request->all());
-        return redirect()->Route("usuario.index");
+        Animal::find($id)->update($request->all());
+        return redirect()->Route("animal.index");
     }
 
     /**
@@ -80,7 +80,7 @@ class UsuarioController extends Controller
      */
     public function destroy(Request $request)
     {
-        Usuario::destroy($request->id);
-        return redirect("/usuario");
+        Animal::destroy($request->id);
+        return redirect("/animal");
     }
 }
