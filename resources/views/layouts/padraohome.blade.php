@@ -60,6 +60,9 @@
                 <a class="nav-link" href="/perfil"><h4 style="font-family: 'Roboto', sans-serif;">PERFIL</h4></a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/gerenciar_entidades"><h4 style="font-family: 'Roboto', sans-serif;">ENTIDADES</h4></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/cuidados_basicos"><h4 style="font-family: 'Roboto', sans-serif;">CUIDADOS BÁSICOS</h4></a>
             </li>
             <li class="nav-item">
