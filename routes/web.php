@@ -51,4 +51,8 @@ Route::get('/perfilInt', function () {
 Route::get('/cadastraranimal', function () {
     return view('cadastroanimal');
 });
+Route::get('/gerenciar_entidades', function () {
+    return view('entidades');
+});
+
 
