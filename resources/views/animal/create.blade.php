@@ -13,7 +13,7 @@
 
             <label  for="pelagem">Pelagem:</label>
             <select name="pelagem" class="form-control" id="pelagem">
-                <option disabled>selecione uma pelagem</option>
+                <option disabled >selecione uma pelagem</option>
                 <option value="2">curto</option>
                 <option value="3">médio</option>
                 <option value="1">longo</option>

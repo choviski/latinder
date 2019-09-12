@@ -27,8 +27,12 @@
             <label  for="senha">Senha:</label>
             <input type="password" class="form-control" id="senha" value="{{$usuario->senha}}"name="senha" required>
 
+            <label  for="perfil">Perfil:</label>
+            <input type="number" min="1" max="2" class="form-control" id="perfil" value="{{$usuario->perfil}}"name="perfil" required>
+
+
             <label  for="img">Imagem:</label>
-            <input type="file" class="form-control" id="img" value="{{$usuario->nome}}" name="imagem" required>
+            <input type="file" class="form-control" id="img" value="{{$usuario->nome}}" name="imagem">
 
 
             <input type="submit" class="btn btn-primary mt-2">

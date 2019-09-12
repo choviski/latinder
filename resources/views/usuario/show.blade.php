@@ -12,6 +12,7 @@
             <th scope="col">LOGIN</th>
             <th scope="col">SENHA</th>
             <th scope="col">E-MAIL</th>
+            <th scope="col">PERFIL</th>
             <th scope="col">IMAGEM</th>
             <th scope="col">CREATED_AT</th>
             <th scope="col">UPDATED_AT</th>
@@ -25,6 +26,12 @@
             <td>{{$usuario->login}}</td>
             <td>{{$usuario->senha}}</td>
             <td>{{$usuario->email}}</td>
+
+            @if( $usuario->perfil == 2)
+                <td>ADMINISTRADOR</td>
+                @else
+                <td>USUÁRIO</td>
+                @endif
             <td>{{$usuario->imagem}}</td>
             <td>{{$usuario->created_at}}</td>
             <td>{{$usuario->updated_at}}</td>

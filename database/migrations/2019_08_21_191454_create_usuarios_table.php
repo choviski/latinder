@@ -19,6 +19,7 @@ class CreateUsuariosTable extends Migration
             $table->string("login");
             $table->string("senha");
             $table->string("email");
+            $table->integer("perfil");
             $table->string("imagem")->nullable();
             $table->softDeletes();
             $table->timestamps();
