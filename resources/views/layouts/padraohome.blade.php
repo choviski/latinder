@@ -59,9 +59,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="/perfil"><h4 style="font-family: 'Roboto', sans-serif;">PERFIL</h4></a>
             </li>
+
+            @if($usuario->perfil > 1)
+
+
             <li class="nav-item">
                 <a class="nav-link" href="/gerenciar_entidades"><h4 style="font-family: 'Roboto', sans-serif;">ENTIDADES</h4></a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="/cuidados_basicos"><h4 style="font-family: 'Roboto', sans-serif;">CUIDADOS BÁSICOS</h4></a>
             </li>
@@ -69,15 +74,16 @@
                 <a class="nav-link" href="/direitos_dos_animais"><h4 style="font-family: 'Roboto', sans-serif;">DIREITO DOS ANIMAIS</h4></a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Insira os dados">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+
+        <form class="form-inline my-2 my-lg-0  d-flex justify-content-center">
+            <input class="form-control mr-sm-2 col-sm-8 " type="search" placeholder="Insira os dados">
+            <button class="btn btn-outline-primary my-2 my-sm-0 " type="submit"><i class="fas fa-search"></i></button>
         </form>
     </div>
 
 
 </nav>
-<div style="margin-top: 120px"></div>
+<div style="margin-top: 100px"></div>
 @yield('content')
 
 

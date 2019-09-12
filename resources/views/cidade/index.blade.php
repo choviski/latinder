@@ -5,6 +5,7 @@
 
 @section('content')<ul class="list-group">
     <ul class="list-group">
+        <a href="{{route("entidades")}}"><button class="btn btn-outline-secondary col-1 mb-2">VOLTAR</button></a>
         @foreach($cidades as $cidade)
 
             <li class="list-group-item align-items-center d-flex justify-content-between">ID #{{$cidade->id}} |
@@ -18,7 +19,7 @@
                     @csrf
                     <button class="btn btn-info mr-1"> <i class="far fa-edit"></i> </button>
                 </form>
-                <form method="post" action="/mensagem/remover/{{$cidade->id}}" onsubmit="return confirm('Tem certeza que deseja excluir {{$cidade->nome}} ?')">
+                <form method="post" action="/cidade/remover/{{$cidade->id}}" onsubmit="return confirm('Tem certeza que deseja excluir {{$cidade->nome}} ?')">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
@@ -29,6 +30,6 @@
     </ul>
     <form method="get" action="{{route("cidade.create")}}">
         @csrf
-        <button class="btn btn btn-outline-primary mt-2 ">Adicionar</button>
+        <button class="btn btn btn-outline-primary mt-2 col-1">Adicionar</button>
     </form>
 @endsection

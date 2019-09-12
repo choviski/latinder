@@ -9,9 +9,9 @@
         <input type="submit" value="Entrar" class="btn-block btn-primary rounded mt-2">
         <a href="#">Esqueci minha senha</a>
     </form>
-    <a href="/usuario/create"><button  class="btn-block btn-primary rounded">Cadastrar-se</button></a>
+    <a href="{{route('cadastroUsuario')}}"><button  class="btn-block btn-primary rounded">Cadastrar-se</button></a>
     @if(!empty($mensagem))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger mt-2">
             {{$mensagem}}
         </div>
     @endif

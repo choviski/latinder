@@ -5,7 +5,11 @@
 @endsection
 
 @section('content')<ul class="list-group">
+
     <ul class="list-group">
+
+        <a href="{{route("entidades")}}"><button class="btn btn-outline-secondary col-1 mb-2">VOLTAR</button></a>
+
         @foreach($animais as $animal)
 
             <li class="list-group-item align-items-center d-flex justify-content-between">ID #{{$animal->id}} |
@@ -19,7 +23,7 @@
                     @csrf
                     <button class="btn btn-info mr-1"> <i class="far fa-edit"></i> </button>
                 </form>
-                <form method="post" action="/endereco/remover/{{$animal->id}}" onsubmit="return confirm('Tem certeza que deseja excluir {{$animal->nome}} ?')">
+                <form method="post" action="/animal/remover/{{$animal->id}}" onsubmit="return confirm('Tem certeza que deseja excluir {{$animal->nome}} ?')">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
@@ -30,6 +34,6 @@
     </ul>
     <form method="get" action="{{route("animal.create")}}">
         @csrf
-        <button class="btn btn btn-outline-primary mt-2 ">Adicionar</button>
+        <button class="btn btn btn-outline-primary mt-2 col-1 ">Adicionar</button>
     </form>
 @endsection
