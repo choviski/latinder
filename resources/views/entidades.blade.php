@@ -3,6 +3,15 @@
     <div class="container-fluid">
         <div class="row text-light text-center d-flex justify-content-center">
 
+
+
+            <div class="col-md-9 col-sm12 rounded mb-2 ml-md-1  pt-4 mt-3 text-center shadow-md  btn btn-outline-primary rounded" style="height: 150px">
+                <a href="/dashboard" class="text-light">
+                    <i class="fas fa-chart-line fa-3x"></i>
+                    <h4 class="mt-2">Dashboard</h4>
+                </a>
+            </div>
+
             <div class="col-md-3 col-sm12 rounded mb-2 ml-md-1  pt-4 mt-3 text-center shadow-md  btn btn-outline-primary rounded" style="height: 150px">
                 <a href="animal" class="text-light">
                     <i class="fas fa-cat fa-3x"></i>
