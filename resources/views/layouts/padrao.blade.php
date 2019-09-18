@@ -69,6 +69,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/direitos_dos_animais"><h4 style="font-family: 'Roboto', sans-serif;">DIREITO DOS ANIMAIS</h4></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route("sair")}}"><h4 style="font-family: 'Roboto', sans-serif;">SAIR</h4></a>
+                </li>
             </ul>
 
         </div>
