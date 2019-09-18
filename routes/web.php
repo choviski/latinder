@@ -31,6 +31,8 @@ Route::resource("/animal", "AnimalController",["except"=>"destroy"])->middleware
 Route::delete('/animal/remover/{id}', "AnimalController@destroy")->middleware(CheckAdm::class);
 Route::post('/login','LoginController@entrar');
 
+Route::get('/dashboard','DashboardController@getMonthlyAllData')->middleware(CheckAdm::class);
+
 
 Route::get('/', "LoginController@index")->name("inicio");
 

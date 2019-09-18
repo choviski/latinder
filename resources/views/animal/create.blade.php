@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+
+
     <form  action="{{Route('animal.store')}}" method="post">
         @csrf
         <div class="form-group bg-light p-2 rounded">
@@ -64,7 +66,7 @@
             <input type="file" class="form-control" id="imagem" placeholder="insira a Imagem" name="imagem" required>
 
             <label  for="descricao">Descrição:</label>
-            <textarea class="form-control" id="descricao" rows="3" name="descricao"></textarea>
+            <textarea class="form-control" id="descricao" rows="3" name="descricao" required></textarea>
 
 
             <label  for="raca">Raça:</label>

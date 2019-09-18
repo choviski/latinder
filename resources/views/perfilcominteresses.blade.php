@@ -12,8 +12,8 @@
     </style>
     <div class="row">
         <div class="col-4 col-md-2 text-center bg-light border-top border-bottom border-right p-2   ">
-            <img src="images/Latinder logo mobile.png" class="rounded-circle border" width="60px">
-            <a>Nome do coleguinha</a>
+            <img src="{{$usuario->imagem}}" class="rounded-circle border" width="80px">
+            <p class="font-weight-bold">{{$usuario->nome}}</p>
         </div>
         <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border-right border p-2"><a href="/perfil"><h5 class="mt-4 mt-md-3 text-muted">CADASTROS</h5></a></div>
         <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border p-2"><a href="/perfilInt"><h5 class="mt-4 mt-md-3 text-muted "><u>INTERESSES</u></h5></a></div>
