@@ -16,8 +16,8 @@
     @foreach($publicacoes as $publicacao)
     <div class="container-fluid">
         <div class="row d-flex justify-content-center">
-
-            <div class="col-md-8 col-sm-10 col-lg-7 col-11 bg-light rounded shadow mt-md-5 mt-2 mb-1">
+            <!-- INICIO DO CORPO DA POSTAGEM -->
+            <div class="col-md-8 col-sm-10 col-lg-7 col-11 bg-light rounded shadow mt-md-2 mt-2 mb-1">
                 <div class="col-12 text-muted p-2">
                     <img class="rounded-circle border text" src="images/Latinder logo mobile.png" width="80px">
                     <a class="ml-3 mt-5" style="font-family: 'Roboto', sans-serif; font-size:30px ">{{$publicacao->usuario->nome}}</a>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- INICIO DO CORPO DA POSTAGEM -->
 
         </div>
     </div>

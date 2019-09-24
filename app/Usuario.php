@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Usuario extends Model
 {
     protected $table ="usuarios";
-    protected $fillable = ['nome','login','email','senha','imagem'];
+
+    protected $fillable = ['nome','login','email','senha','imagem','perfil'];
+    use SoftDeletes;
     public function animal(){
         return $this->belongsToMany('App\Animais', 'publicacaos', 'id_usuario', 'id_animal');
     }
@@ -18,5 +20,6 @@ class Usuario extends Model
     public function publicacao2(){
         return $this->belongsToMany('App\Publicacao', 'comentarios', 'id_usuario', 'id_publicacao');
     }
-    use SoftDeletes;
+
+
 }

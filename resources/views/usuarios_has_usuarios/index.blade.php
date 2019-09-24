@@ -6,6 +6,7 @@
 
 @section('content')<ul class="list-group">
     <ul class="list-group">
+        <a href="{{route("entidades")}}"><button class="btn btn-outline-secondary col-1 mb-2">VOLTAR</button></a>
         @foreach($usuarios_has_usuarios as $u)
 
             <li class="list-group-item align-items-center d-flex justify-content-between">ID #{{$u->id}} | Usuário 1: {{$u->id_usuario}} | Usuário 2: {{$u->id_usuario2}}
@@ -30,6 +31,6 @@
     </ul>
     <form method="get" action="{{route("usuarios_has_usuarios.create")}}">
         @csrf
-        <button class="btn btn btn-outline-primary mt-2 ">Adicionar</button>
+        <button class="btn btn btn-outline-primary mt-2 col-1 ">Adicionar</button>
     </form>
 @endsection

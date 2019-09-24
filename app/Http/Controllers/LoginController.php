@@ -30,5 +30,10 @@ class LoginController extends Controller
         $request->session()->flash("mensagem","Usuario não cadastrado");
         return redirect()->back();
     }
+
+    public function sair(Request $request){
+        $request->session()->flush();
+        return redirect("/");
+    }
     }
 

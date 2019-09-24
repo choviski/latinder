@@ -6,7 +6,7 @@
 
 @section('content')
     <table class="table bg-light rounded">
-        <thead style="background-color:lightgreen">
+        <thead style="background-color:lightskyblue">
         <tr>
             <th scope="col">ID</th>
             <th scope="col">NOME</th>

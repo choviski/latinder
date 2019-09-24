@@ -7,7 +7,15 @@
 @endsection
 
 @section('content')
+    <script>
+        function imagem1() {
+            document.getElementById("imagem").value = "../../../imgs_perfil/foto_perfil1.png";
+        }
+        function imagem2() {
+            document.getElementById("imagem").value = "../../../imgs_perfil/foto_perfil2.png";
+        }
 
+    </script>
     <form class="form-horizontal" action="{{Route('usuario.update',['usuario'=> $usuario->id])}}" method="post">
         @csrf
         @method('PUT')
@@ -27,11 +35,26 @@
             <label  for="senha">Senha:</label>
             <input type="password" class="form-control" id="senha" value="{{$usuario->senha}}"name="senha" required>
 
-            <label  for="img">Imagem:</label>
-            <input type="file" class="form-control" id="img" value="{{$usuario->nome}}" name="imagem" required>
+            <label  for="perfil">Perfil:</label>
+            <input type="number" min="1" max="2" class="form-control" id="perfil" value="{{$usuario->perfil}}"name="perfil" required>
+
+            <p class="text-center mt-1 font-weight-bold">Foto de perfil:</p>
+            <div class="d-flex justify-content-center">
+                <a onclick="imagem1()" class="col-md-5 col-sm-12 mt-1  btn btn-light rounded">
+                    <div class="view overlay zoom" >
+                        <img class="img-fluid rounded-circle " src="../../../imgs_perfil/foto_perfil1.png"  width="200px">
+                    </div>
+                </a>
+                <a onclick="imagem2()" class="col-md-5 col-sm-12 mt-1  btn btn-light rounded">
+                    <div class="view overlay zoom" >
+                        <img class="img-fluid rounded-circle " src="../../../imgs_perfil/foto_perfil2.png"  width="200px">
+                    </div>
+                </a>
+            </div>
+            <input type="hidden" class="form-control"  id="imagem" value="{{$usuario->imagem}}" name="imagem">
 
 
-            <input type="submit" class="btn btn-primary mt-2">
+            <input type="submit" class="btn-block btn-primary mt-2 ">
 
         </div>
     </form>

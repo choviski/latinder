@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+
+
     <form  action="{{Route('animal.store')}}" method="post">
         @csrf
         <div class="form-group bg-light p-2 rounded">
@@ -13,7 +15,7 @@
 
             <label  for="pelagem">Pelagem:</label>
             <select name="pelagem" class="form-control" id="pelagem">
-                <option disabled>selecione uma pelagem</option>
+                <option disabled >selecione uma pelagem</option>
                 <option value="2">curto</option>
                 <option value="3">médio</option>
                 <option value="1">longo</option>
@@ -64,7 +66,7 @@
             <input type="file" class="form-control" id="texto" placeholder="insira uma imagem" name="imagem" accept="image/*" required>
 
             <label  for="descricao">Descrição:</label>
-            <textarea class="form-control" id="descricao" rows="3" name="descricao"></textarea>
+            <textarea class="form-control" id="descricao" rows="3" name="descricao" required></textarea>
 
 
             <label  for="raca">Raça:</label>
