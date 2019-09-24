@@ -63,14 +63,14 @@
             <input type="number" class="form-control" id="idade" placeholder="insira o idade aproximada em anos(se você não souber deixe em branco)" name="idade">
 
             <label  for="imagem">Imagem:</label>
-            <input type="file" class="form-control" id="imagem" placeholder="insira a Imagem" name="imagem" required>
+            <input type="file" class="form-control" id="texto" placeholder="insira uma imagem" name="imagem" accept="image/*" required>
 
             <label  for="descricao">Descrição:</label>
             <textarea class="form-control" id="descricao" rows="3" name="descricao" required></textarea>
 
 
             <label  for="raca">Raça:</label>
-            <input type="number" class="form-control" id="raca" placeholder="insira o id da raça" name="id_racas" required>
+            <input type="number" class="form-control" id="raca" placeholder="insira o id da raça" name="id_raca" required>
 
             <label  for="endereco">Endereco:</label>
             <input type="number" class="form-control" id="endereco" placeholder="insira o id do endereco" name="id_endereco" required>

@@ -40,7 +40,7 @@
             <td>{{$animal->idade}}</td>
             <td>{{$animal->imagem}}</td>
             <td>{{$animal->porte}}</td>
-            <td>{{$animal->id_endereco}}</td>
+            <td>{{$animal->endereco->rua}}</td>
             <td>{{$animal->created_at}}</td>
             <td>{{$animal->updated_at}}</td>
             <td>{{$animal->deleted_at}}</td>

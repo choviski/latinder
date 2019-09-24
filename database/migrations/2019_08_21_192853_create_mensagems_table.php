@@ -16,8 +16,10 @@ class CreateMensagemsTable extends Migration
         Schema::create('mensagems', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("conteudo");
-            $table->bigInteger("id_destinatario");
-            $table->bigInteger("id_remetente");
+            $table->unsignedBigInteger("id_destinatario");
+            $table->foreign("id_destinatario")->references("id")->on("usuarios");
+            $table->unsignedBigInteger("id_remetente");
+            $table->foreign("id_remetente")->references("id")->on("usuarios");
             $table->softDeletes();
             $table->timestamps();
         });
