@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Animal;
+use App\Publicacao;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Input;
+use File;
 class AnimalController extends Controller
 {
     public function index()
@@ -31,8 +33,19 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        Animal:: create($request->all());
-        return redirect()->route("animal.index");
+        $animal = Animal::create($request->all());
+        $imagem = Input::file("imagem");
+        $extensao=$imagem->getClientOriginalExtension();
+        $imagem=File::move($imagem,public_path().'/imagem-animal/animal-id'.$animal->id.'.'.$extensao);
+        $animal->imagem='imagem-animal/animal-id'.$animal->id.'.'.$extensao;
+        $animal->save();
+        $publicacao = new Publicacao();
+        $publicacao->id_animal= $animal->id;
+        $usuario = session()->get("usuario");
+        $publicacao->id_usuario=$usuario->id;
+        $publicacao->save();
+        $publicacoes=Publicacao::all();
+        return view("home")->with(["publicacoes"=>$publicacoes]);
     }
 
     /**

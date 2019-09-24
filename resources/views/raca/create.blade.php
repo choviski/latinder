@@ -9,10 +9,10 @@
         @csrf
         <div class="form-group bg-light p-2 rounded">
             <label  for="nome">Nome:</label>
-            <input type="number" class="form-control" id="nome" placeholder="insira o nome da raça" name="nome" required>
+            <input type="text" class="form-control" id="nome" placeholder="insira o nome da raça" name="nome" required>
 
-            <label  for="login">Id da espécie:</label>
-            <input type="number" class="form-control" id="id_especies" placeholder="Insira o id da raça" name="id_especies" required>
+            <label  for="id_especies">Id da espécie:</label>
+            <input type="number" class="form-control" id="id_especies" placeholder="Insira o id da raça" name="id_especie" required>
 
             <input type="submit" class="btn btn-primary mt-2">
 

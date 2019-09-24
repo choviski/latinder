@@ -15,8 +15,10 @@ class CreatePublicacaosTable extends Migration
     {
         Schema::create('publicacaos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("conteudo");
-            $table->bigInteger("id_usuario");
+            $table->unsignedBigInteger("id_usuario");
+            $table->foreign("id_usuario")->references("id")->on("usuarios");
+            $table->unsignedBigInteger("id_animal");
+            $table->foreign("id_animal")->references("id")->on("animals");
             $table->softDeletes();
             $table->timestamps();
         });

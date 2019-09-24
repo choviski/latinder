@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsuarioHasAnimalsTable extends Migration
+class CreateRacasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateUsuarioHasAnimalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('usuario_has_animals', function (Blueprint $table) {
+        Schema::create('raca', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger("id_animais");
-            $table->bigInteger("id_usuarios");
+            $table->string("nome");
+            $table->unsignedBigInteger("id_especie");
+            $table->foreign("id_especie")->references("id")->on("especies");
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +30,6 @@ class CreateUsuarioHasAnimalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuario_has_animals');
+        Schema::dropIfExists('raca');
     }
 }

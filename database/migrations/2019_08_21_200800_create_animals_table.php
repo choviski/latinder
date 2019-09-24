@@ -25,8 +25,10 @@ class CreateAnimalsTable extends Migration
             $table->string("imagem");
             $table->string("descricao");
             $table->enum("cor",["preto","branco","dourado","creme","amarelo","chocolate","mestico"]);
-            $table->bigInteger("id_racas");
-            $table->bigInteger("id_endereco");
+            $table->unsignedBigInteger("id_endereco");
+            $table->foreign("id_endereco")->references("id")->on("enderecos");
+            $table->unsignedBigInteger("id_raca");
+            $table->foreign("id_raca")->references("id")->on("raca");
             $table->softDeletes();
             $table->timestamps();
         });

@@ -15,8 +15,10 @@ class CreateUsuarioHasUsuariosTable extends Migration
     {
         Schema::create('usuario_has_usuarios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger("id_usuario");
-            $table->bigInteger("id_usuario2");
+            $table->unsignedBigInteger("id_usuario");
+            $table->foreign("id_usuario")->references("id")->on("usuarios");
+            $table->unsignedBigInteger("id_usuario2");
+            $table->foreign("id_usuario2")->references("id")->on("usuarios");
             $table->timestamps();
         });
     }

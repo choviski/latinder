@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Usuario;
+use App\Publicacao;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -18,9 +19,10 @@ class LoginController extends Controller
             $Usuario=$Usuario[0];
 
             if ($Usuario->senha==$request->senha){
-                $request->session()->put("Usuario",$Usuario);
+                $request->session()->put("usuario",$Usuario);
+                $publicacoes=Publicacao::all();
 
-                return redirect("/home");
+                return view("/home")->with(["publicacoes"=>$publicacoes]);
             }
             $request->session()->flash("mensagem","Usuario ou senha incorretos");
             return redirect()->back();

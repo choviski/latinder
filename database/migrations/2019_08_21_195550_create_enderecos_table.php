@@ -19,7 +19,8 @@ class CreateEnderecosTable extends Migration
             $table->string("bairro");
             $table->string("complemento");
             $table->bigInteger("cep");
-            $table->bigInteger("id_cidade");
+            $table->unsignedBigInteger("id_cidade");
+            $table->foreign("id_cidade")->references("id")->on("cidades");
             $table->softDeletes();
             $table->timestamps();
         });
