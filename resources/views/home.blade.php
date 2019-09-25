@@ -37,10 +37,10 @@
                         <a>{{$publicacao->animal->descricao}}</a>
                     </div>
                     <div class="mt-3 pb-2">
-                        <a>{{$publicacao->animal->endereco->rua}}</a>
+                        <a><i class="fas fa-map-marker-alt"></i> {{$publicacao->animal->endereco->rua}}</a>
                     </div>
-                    <div class="mt-3 pb-2">
-                        <a href="interesses/{{$publicacao->id}}">curtir</a>
+                    <div class="mt-3 pb-2 ">
+                	    <a href="interesses/{{$publicacao->id}}" class=""><i class="far fa-heart fa-2x border border-primary rounded-circle p-2"></i></a>
                     </div>
                 </div>
             </div>
