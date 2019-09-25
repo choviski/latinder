@@ -9,13 +9,13 @@
   <script>
        function imagem1() {
           document.getElementById("imagem").value = "../../../imgs_perfil/foto_perfil1.png";
-          document.getElementById("img1").style.border = "1px solid black"
-          document.getElementById("img2").style.border = "0px"
+          document.getElementById("img1").style.border = "1px solid black";
+          document.getElementById("img2").style.border = "0px";
       }
       function imagem2() {
           document.getElementById("imagem").value = "../../../imgs_perfil/foto_perfil2.png";
-          document.getElementById("img2").style.border = "1px solid black"
-          document.getElementById("img1").style.border = "0px"
+          document.getElementById("img2").style.border = "1px solid black";
+          document.getElementById("img1").style.border = "0px";
       }
   </script>
     <div class=" p-2 bg-light rounded shadow text-center">
