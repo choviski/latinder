@@ -7,13 +7,16 @@
 
 @section('content')
   <script>
-      function imagem1() {
-        document.getElementById("imagem").value = "../../../imgs_perfil/foto_perfil1.png";
+       function imagem1() {
+          document.getElementById("imagem").value = "../../../imgs_perfil/foto_perfil1.png";
+          document.getElementById("img1").style.border = "1px solid black"
+          document.getElementById("img2").style.border = "0px"
       }
       function imagem2() {
           document.getElementById("imagem").value = "../../../imgs_perfil/foto_perfil2.png";
+          document.getElementById("img2").style.border = "1px solid black"
+          document.getElementById("img1").style.border = "0px"
       }
-
   </script>
     <div class=" p-2 bg-light rounded shadow text-center">
         <form action="{{route("storeUsuario")}}" method="post" class="form-group ">
@@ -24,12 +27,12 @@
             <input type="password" name="senha" class="form-control mt-2" placeholder="Senha" required>
             <p class="text-center mt-1 font-weight-bold">Escolha uma foto de perfil:</p>
             <a onclick="imagem1()" class="col-md-5 col-sm-12 mt-1  btn btn-light rounded">
-                <div class="view overlay zoom" >
+                <div class="view overlay zoom" id="img1" >
                     <img class="img-fluid rounded-circle " src="../../../imgs_perfil/foto_perfil1.png"  width="200px">
                 </div>
             </a>
             <a onclick="imagem2()" class="col-md-5 col-sm-12 mt-1  btn btn-light rounded">
-                <div class="view overlay zoom" >
+                <div class="view overlay zoom" id="img2">
                     <img class="img-fluid rounded-circle " src="../../../imgs_perfil/foto_perfil2.png"  width="200px">
                 </div>
             </a>
