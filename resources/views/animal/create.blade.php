@@ -7,7 +7,7 @@
 @section('content')
 
 
-    <form  action="{{Route('animal.store')}}" method="post">
+    <form  action="{{Route('animal.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group bg-light p-2 rounded">
             <label  for="nome">Nome:</label>

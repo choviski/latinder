@@ -19,10 +19,10 @@ class LoginController extends Controller
             $Usuario=$Usuario[0];
 
             if ($Usuario->senha==$request->senha){
-                $request->session()->put("usuario",$Usuario);
-                $publicacoes=Publicacao::all();
+                $request->session()->put("Usuario",$Usuario);
 
-                return view("/home")->with(["publicacoes"=>$publicacoes]);
+
+                return redirect("timeLine");
             }
             $request->session()->flash("mensagem","Usuario ou senha incorretos");
             return redirect()->back();

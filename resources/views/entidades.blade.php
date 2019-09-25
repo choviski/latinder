@@ -83,14 +83,6 @@
             </div>
 
             <div class="col-md-3 col-sm12 rounded mb-2 ml-md-1 pt-4 mt-3 text-center shadow-md  btn btn-outline-primary rounded" style="height: 150px">
-                <a href="usuarioAnimal" class="text-light">
-                    <i class="fas fa-user fa-3x"></i>
-                    <i class="fas fa-dog fa-3x"></i>
-                    <h4 class="mt-2">Usuários/Animais</h4>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm12 rounded mb-2 ml-md-1 pt-4 mt-3 text-center shadow-md  btn btn-outline-primary rounded" style="height: 150px">
                 <a href="usuarios_has_usuarios" class="text-light">
                     <i class="fas fa-user-friends fa-3x"></i>
                     <h4 class="mt-2">Usuários/Usuários</h4>

@@ -7,6 +7,8 @@ use App\Publicacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use File;
+use Illuminate\Support\Facades\DB;
+
 class AnimalController extends Controller
 {
     public function index()
@@ -41,11 +43,11 @@ class AnimalController extends Controller
         $animal->save();
         $publicacao = new Publicacao();
         $publicacao->id_animal= $animal->id;
-        $usuario = session()->get("usuario");
+        $usuario = session()->get("Usuario");
         $publicacao->id_usuario=$usuario->id;
         $publicacao->save();
-        $publicacoes=Publicacao::all();
-        return view("home")->with(["publicacoes"=>$publicacoes]);
+        return redirect("timeLine");
+
     }
 
     /**
