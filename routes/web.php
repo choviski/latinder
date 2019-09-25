@@ -22,14 +22,17 @@ Route::resource("/publicacao","PublicacaoController",['except'=>'destroy'])->mid
 Route::delete('/publicacao/remover/{id}', "PublicacaoController@destroy")->middleware(CheckSession::class,CheckAdm::class);
 Route::resource("/comentario","ComentarioController",['except'=>'destroy'])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/comentario/remover/{id}', "ComentarioController@destroy")->middleware(CheckSession::class,CheckAdm::class);
-
+Route::get('/timeLine',"TimeLineController@timeLine")->middleware(CheckSession::class)->name("timeLine");
+Route::get('interesses/{id}',"InteresseController@store")->middleware(CheckSession::class)->name("interesses/{id}");;
+Route::get('listar',"InteresseController@listar")->middleware(CheckSession::class)->name("listar");;
+Route::get('cadastrar',"PublicacaoController@listar")->middleware(CheckSession::class)->name("cadastrar");;
 
 Route::resource("/endereco", "EnderecoController",["except"=>"destroy"])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/endereco/remover/{id}', "EnderecoController@destroy")->middleware(CheckSession::class,CheckAdm::class);
 Route::resource("/usuarioAnimal", "UsuarioAnimalController",["except"=>"destroy"])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/usuarioAnimal/remover/{id}', "UsuarioAnimalController@destroy")->middleware(CheckSession::class,CheckAdm::class);
-Route::resource("/animal", "AnimalController",["except"=>"destroy"])->middleware(CheckSession::class,CheckAdm::class);
-Route::delete('/animal/remover/{id}', "AnimalController@destroy")->middleware(CheckSession::class,CheckAdm::class);
+Route::resource("/animal", "AnimalController",["except"=>"destroy"])->middleware(CheckSession::class);
+Route::delete('/animal/remover/{id}', "AnimalController@destroy")->middleware(CheckSession::class);
 Route::post('/login','LoginController@entrar');
 
 Route::get('/dashboard','DashboardController@getMonthlyAllData')->middleware(CheckSession::class,CheckAdm::class);

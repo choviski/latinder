@@ -29,6 +29,12 @@ class PublicacaoController extends Controller
         $publicacao=Publicacao::find($id);
         return view("publicacao.show")->with(["publicacao"=>$publicacao]);
     }
+    public function listar()
+    {
+        $usuario = session()->get("Usuario");
+        $publicacao=Publicacao::where('id_usuario','=',$usuario->id)->orderBy('created_at', 'desc')->get();
+        return view("perfilcomcadastros")->with(["publicacaos"=>$publicacao,"usuario"=>$usuario]);
+    }
 
     /**
      * Show the form for editing the specified resource.

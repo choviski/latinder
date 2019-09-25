@@ -18,5 +18,8 @@ class Publicacao extends Model
     public function usuarios(){
         return $this->belongsToMany('App\Usuario', 'comentarios', 'id_publicacao', 'id_usuario');
     }
+    public function interesse(){
+        return $this->hasOne('App\Interesse', 'id_publicacao','id');
+    }
     use SoftDeletes;
 }
