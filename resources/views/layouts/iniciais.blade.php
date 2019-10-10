@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -27,7 +27,7 @@
 <body class="container-fluid ">
     <div class="row d-flex justify-content-center">
         <div class=" col-md-6 col-sm10 text-center" style="margin-top: 10%;transform: translateY(-20%)">
-            <img src="../images/Latinder Logo.png"  class="mt-5 " id="logo">
+            <img src="../images/Latinder Logo.png"  class="mt-5 mb-5 mb-md-0 mb-lg-0" id="logo">
             @yield('content')
 
         </div>

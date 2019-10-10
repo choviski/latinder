@@ -73,12 +73,16 @@
             <input type="number" class="form-control" id="raca" placeholder="insira o id da raça" name="id_raca" required>
 
             <label  for="endereco">Endereco:</label>
-            <input type="number" class="form-control" id="endereco" placeholder="insira o id do endereco" name="id_endereco" required>
+            <select name="id_endereco" class="form-control"  onchange="endereco()" id="endereco">
+                <option value="1">RUA a</option>
+            </select>
+
+
 
             <input type="submit" class="btn btn-primary mt-2">
-
         </div>
     </form>
+
 
 
 @endsection

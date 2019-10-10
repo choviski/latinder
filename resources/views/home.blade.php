@@ -1,3 +1,7 @@
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
 @extends('/layouts/padraohome')
 @section('content')
     <style>
@@ -22,6 +26,11 @@
                     <img class="rounded-circle border text" src="{{$publicacao->usuario->imagem}}" width="80px">
                     <a class="ml-3 mt-5" style="font-family: 'Roboto', sans-serif; font-size:30px ">{{$publicacao->usuario->nome}}</a>
                     {{$publicacao->tempo}}
+                    <form method="post" action="/publicacao/remover/{{$publicacao->id}}" onsubmit="return confirm('Tem certeza que deseja excluir essa publicacao ?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    </form>
                 </div>
                 <div class="rounded">
                     <img src="{{$publicacao->animal->imagem}}" class="rounded" width="100%">
@@ -40,14 +49,31 @@
                         <a><i class="fas fa-map-marker-alt"></i> {{$publicacao->animal->endereco->rua}}</a>
                     </div>
                     <div class="mt-3 pb-2 ">
-                	    <a href="interesses/{{$publicacao->id}}" class=""><i class="far fa-heart fa-2x border border-primary rounded-circle p-2"></i></a>
+<a href="interesses/{{$publicacao->id}}">
+                            <i class="far fa-heart fa-2x border border-primary rounded-circle p-2" id="publicacao{{$publicacao->id}}"></i>
+</a>
                     </div>
+                    @foreach($comentarios as $comentario)
+                        @if($comentario->id_publicacao == $publicacao->id)
+                            <div><img src="{{$comentario->usuario->imagem}}" width="50px" class="rounded-circle">{{$comentario->usuario->nome}}:{{$comentario->conteudo}}</div>
+                        @endif
+
+                    @endforeach
+<form method="get" action="comentar">
+                        @csrf
+                        <input type="hidden" value="{{$publicacao->id}}" name="publicacao">
+        <textarea class="rounded w-100" placeholder="Insira seu comentario aqui....." style="height: 150px;" name="conteudo"></textarea>
+                        <input type="submit" value="Comentar" class="btn btn-outline-primary mb-3 col-sm-12 col-md-12 col-lg-12">
+</form>
                 </div>
             </div>
-            <!-- INICIO DO CORPO DA POSTAGEM -->
+
+
 
         </div>
     </div>
+
+
 @endforeach
 
 @endsection

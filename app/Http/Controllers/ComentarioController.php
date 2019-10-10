@@ -17,11 +17,27 @@ class ComentarioController extends Controller
     {
         return view("comentario.create");
     }
+    public function comentar(Request $request){
+    $usuario=$request->session()->get("Usuario");
+    $comentario = new Comentario;
+    $comentario->id_usuario = $usuario->id;
+    $comentario->id_publicacao=$request->publicacao;
+    $comentario->conteudo=$request->conteudo;
+    $comentario->save();
+    return redirect("timeLine");
+
+        }
+
 
     public function store(Request $request)
     {
-        Comentario::create($request->all());
-        return redirect()->Route("comentario.index");
+        $usuario=$request->session()->get("Usuario");
+
+        $comentario = new Comentario;
+        $comentario->id_usuario = $usuario->id;
+        $comentario->id_publicacao=$request->publicacao;
+        $comentario->save();
+        return redirect("timeLine");
     }
 
     public function show($id)
