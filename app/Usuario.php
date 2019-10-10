@@ -20,6 +20,9 @@ class Usuario extends Model
     public function publicacao2(){
         return $this->belongsToMany('App\Publicacao', 'comentarios', 'id_usuario', 'id_publicacao');
     }
+    public function comentario(){
+        return $this->hasOne('App\Comentario', 'id_usuario','id');
+    }
 
 
 }

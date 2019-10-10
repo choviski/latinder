@@ -70,7 +70,7 @@ class PublicacaoController extends Controller
     public function destroy(Request $request)
     {
         Publicacao::destroy($request->id);
-        return redirect("/publicacao");
+        return redirect("timeLine");
 
     }
 }

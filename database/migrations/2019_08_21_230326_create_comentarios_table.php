@@ -19,7 +19,7 @@ class CreateComentariosTable extends Migration
             $table->foreign("id_usuario")->references("id")->on("usuarios");
             $table->unsignedBigInteger("id_publicacao");
             $table->foreign("id_publicacao")->references("id")->on("publicacaos");
-            $table->string("conteudo");
+            $table->longText("conteudo");
             $table->softDeletes();
             $table->timestamps();
         });
