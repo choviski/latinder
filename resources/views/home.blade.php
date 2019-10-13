@@ -49,21 +49,24 @@
                         <a><i class="fas fa-map-marker-alt"></i> {{$publicacao->animal->endereco->rua}}</a>
                     </div>
                     <div class="mt-3 pb-2 ">
-<a href="interesses/{{$publicacao->id}}">
-                            <i class="far fa-heart fa-2x border border-primary rounded-circle p-2" id="publicacao{{$publicacao->id}}"></i>
-</a>
-                    </div>
-                    @foreach($comentarios as $comentario)
+
+                            <i class="far fa-heart fa-2x border border-primary rounded-circle p-2" id="like{{$publicacao->id}}" onclick="like({{$publicacao->id}})"></i>
+
+         @foreach($comentarios as $comentario)
                         @if($comentario->id_publicacao == $publicacao->id)
                             <div><img src="{{$comentario->usuario->imagem}}" width="50px" class="rounded-circle">{{$comentario->usuario->nome}}:{{$comentario->conteudo}}</div>
-                        @endif
+                                <form method="post" action="/comentario/remover/{{$comentario->id}}" onsubmit="return confirm('Tem certeza que deseja excluir seu comentario?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </form>
+                            @endif
 
                     @endforeach
-<form method="get" action="comentar">
                         @csrf
-                        <input type="hidden" value="{{$publicacao->id}}" name="publicacao">
-        <textarea class="rounded w-100" placeholder="Insira seu comentario aqui....." style="height: 150px;" name="conteudo"></textarea>
-                        <input type="submit" value="Comentar" class="btn btn-outline-primary mb-3 col-sm-12 col-md-12 col-lg-12">
+                        <input type="hidden" value="{{$publicacao->id}}" name="publicacao" id="id{{$publicacao->id}}">
+        <textarea class="rounded w-100" placeholder="Insira seu comentario aqui....." style="height: 150px;" name="conteudo" id="conteudo{{$publicacao->id}}"></textarea>
+                        <input type="submit" value="Comentar" class="btn btn-outline-primary mb-3 col-sm-12 col-md-12 col-lg-12" onclick="comentar({{$publicacao->id}})">
 </form>
                 </div>
             </div>
@@ -72,8 +75,47 @@
 
         </div>
     </div>
+<script
 
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"
+>
+    </script>
+        <script>
+    function like(id){
+        var publicacao = $('#id'+id).val();
+        $.ajax({
+            url:'/interesses/'+publicacao,
+        }).done(
+            function () {
+                document.getElementById("like"+id).classList.remove("far");
+                document.getElementById("like"+id).classList.add("fas");
 
+            }
+        ).fail(
+            function () {
+                alert("erro");
+            }
+        );
+    }
+    function comentar(id){
+        var publicacao = $('#id'+id).val();
+        var conteudo = $('#conteudo'+id).val();
+        $.ajax({
+            url:'/comentar/'+publicacao+'/'+conteudo,
+        }).done(
+            function (data) {
+               alert("vc comentou....eeeeee")
+            }
+        ).fail(
+            function () {
+                alert("erro");
+            }
+        );
+    }
+</script>
+    </div>
 @endforeach
 
 @endsection

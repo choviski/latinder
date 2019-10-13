@@ -17,14 +17,18 @@ class ComentarioController extends Controller
     {
         return view("comentario.create");
     }
-    public function comentar(Request $request){
+    public function comentar($id,Request $request,$conteudo){
     $usuario=$request->session()->get("Usuario");
     $comentario = new Comentario;
     $comentario->id_usuario = $usuario->id;
-    $comentario->id_publicacao=$request->publicacao;
-    $comentario->conteudo=$request->conteudo;
+    $comentario->id_publicacao=$id;
+    $comentario->conteudo=$conteudo;
     $comentario->save();
-    return redirect("timeLine");
+        return response()->json([
+            'comentario' => $conteudo,
+            'imagem'=>$usuario->imagem,
+            'nome'=>$usuario->nome,
+        ]);
 
         }
 
@@ -80,7 +84,7 @@ class ComentarioController extends Controller
     public function destroy(Request $request)
     {
         Comentario::destroy($request->id);
-        return redirect("/comentario");
+        return redirect("/timeLine");
 
     }
 }

@@ -27,7 +27,6 @@ class InteresseController extends Controller
     $interesse->id_publicacao=$publicacao->id;
     $interesse->id_usuario=$usuario->id;
     $interesse->save();
-    return redirect("timeLine");
 }
     public function listar()
     {

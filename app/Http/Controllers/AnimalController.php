@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Animal;
+use App\Endereco;
 use App\Publicacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -49,7 +50,31 @@ class AnimalController extends Controller
         return redirect("timeLine");
 
     }
+public function criar(Request $request){
+    $animal = Animal::create($request->except(['rua,bairro,id_cidade,compl,cep']));
+    $imagem = Input::file("imagem");
+    $extensao=$imagem->getClientOriginalExtension();
+    $imagem=File::move($imagem,public_path().'/imagem-animal/animal-id'.$animal->id.'.'.$extensao);
+    $animal->imagem='imagem-animal/animal-id'.$animal->id.'.'.$extensao;
+    if($request->rua){
+        $endereco= new Endereco();
+        $endereco->rua=$request->rua;
+        $endereco->cep=$request->cep;
+        $endereco->bairro=$request->bairro;
+        $endereco->complemento=$request->complemento;
+        $endereco->id_cidade=$request->id_cidade;
+        $endereco->save();
+        $animal->id_endereco=$endereco->id;
+    }
+    $animal->save();
+    $publicacao = new Publicacao();
+    $publicacao->id_animal= $animal->id;
+    $usuario = session()->get("Usuario");
+    $publicacao->id_usuario=$usuario->id;
+    $publicacao->save();
+    return redirect("timeLine");
 
+}
     /**
      * Display the specified resource.
      *
