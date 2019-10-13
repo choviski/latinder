@@ -33,7 +33,8 @@ Route::delete('/usuarioAnimal/remover/{id}', "UsuarioAnimalController@destroy")-
 Route::resource("/animal", "AnimalController",["except"=>"destroy"])->middleware(CheckSession::class);
 Route::delete('/animal/remover/{id}', "AnimalController@destroy")->middleware(CheckSession::class);
 Route::post('/login','LoginController@entrar');
-Route::get('/comentar',"ComentarioController@comentar")->middleware(CheckSession::class)-> name("comentar");
+Route::get('/comentar/{id}/{conteudo}',"ComentarioController@comentar")->middleware(CheckSession::class)-> name("comentar/{id}/{conteudo}");
+Route::post('/novoAnimal',"AnimalController@criar")->middleware(CheckSession::class)-> name("animar");
 
 
 Route::get('/dashboard','DashboardController@getMonthlyAllData')->middleware(CheckSession::class,CheckAdm::class);

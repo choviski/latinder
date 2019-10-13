@@ -7,7 +7,7 @@
 @section('content')
 
 
-    <form  action="{{Route('animal.store')}}" method="post" enctype="multipart/form-data">
+    <form  action="{{Route('animar')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group bg-light p-2 rounded">
             <label  for="nome">Nome:</label>
@@ -63,7 +63,7 @@
             <input type="number" class="form-control" id="idade" placeholder="insira o idade aproximada em anos(se você não souber deixe em branco)" name="idade">
 
             <label  for="imagem">Imagem:</label>
-            <input type="file" class="form-control" id="texto" placeholder="insira uma imagem" name="imagem" accept="image/*" required>
+            <input type="file" class="form-control" id="texto" placeholder="insira uma imagem" name="imagem" required>
 
             <label  for="descricao">Descrição:</label>
             <textarea class="form-control" id="descricao" rows="3" name="descricao" required></textarea>
@@ -73,14 +73,42 @@
             <input type="number" class="form-control" id="raca" placeholder="insira o id da raça" name="id_raca" required>
 
             <label  for="endereco">Endereco:</label>
-            <select name="id_endereco" class="form-control"  onchange="endereco()" id="endereco">
+            <select name="id_endereco" class="form-control" id="endereco">
                 <option value="1">RUA a</option>
             </select>
+            <section id="faq" class="col-3 text-dark mt-4 mb-2">
+                <div class="container">
+                    <div class="row">
+                        <button class="btn btn-primary shadow text-light col-sm-8 col-md-8 d-flex justify-content-left " type="button" data-toggle="collapse" data-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                              Novo endereço <i class="mt-1 mr-1 fas fa-plus fa-1x">   </i>
+                        </button>
+                        <div class="collapse rounded" id="faq1">
+                            <div class="card card-body  col-sm-12 col-md-12 rounded">
+                                <div class="form-group bg-light p-2 rounded">
+                                    <label  for="rua">Rua:</label>
+                                    <input type="text" class="form-control" id="rua" placeholder="insira o nome da rua" name="rua" >
 
+                                    <label  for="bairro">Bairro:</label>
+                                    <input type="text" class="form-control" id="bairro" placeholder="insira o bairro" name="bairro" >
 
+                                    <label  for="compl">Complemento:</label>
+                                    <input type="text" class="form-control" id="compl" placeholder="insira o complemento" name="complemento" >
 
-            <input type="submit" class="btn btn-primary mt-2">
-        </div>
+                                    <label  for="cep">CEP:</label>
+                                    <input type="text" class="form-control" id="cep" placeholder="insira o CEP" name="cep" >
+
+                                    <label  for="cidade">Cidade:</label>
+                                    <input type="text" class="form-control" id="cidade" placeholder="insira o id da Cidade" name="id_cidade" >
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+            </section>
+            </div>
+        <input type="submit" class="btn btn-primary mt-2">
     </form>
 
 
