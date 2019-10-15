@@ -70,21 +70,28 @@
 
 
             <label  for="raca">Raça:</label>
-            <input type="number" class="form-control" id="raca" placeholder="insira o id da raça" name="id_raca" required>
+            <select class="form-control" id="raca" name="id_raca" required>
+                @foreach($racas as $racas)
+                    <option value="{{$racas->id}}">{{$racas->nome}}</option>
+                @endforeach
+            </select>
 
             <label  for="endereco">Endereco:</label>
             <select name="id_endereco" class="form-control" id="endereco">
-                <option value="1">RUA a</option>
+                <option value="1">ESCOLHA UM ENDEREÇO</option>
+                @foreach($enderecos as $endereco)
+                    <option value="{{$endereco->id}}">{{$endereco->rua}}</option>
+                @endforeach
             </select>
-            <section id="faq" class="col-3 text-dark mt-4 mb-2">
-                <div class="container">
+            <section id="faq" class="col-12  text-dark mt-2">
+                <div class="container p-0 m-0 col-12">
                     <div class="row">
-                        <button class="btn btn-primary shadow text-light col-sm-8 col-md-8 d-flex justify-content-left " type="button" data-toggle="collapse" data-target="#faq1" aria-expanded="false" aria-controls="faq1">
-                              Novo endereço <i class="mt-1 mr-1 fas fa-plus fa-1x">   </i>
+                        <button class="btn btn-outline-primary shadow text-dark col-sm-12 col-md-12 d-flex justify-content-left " type="button" data-toggle="collapse" data-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                            <a class="ml-2">Novo endereço <i class="fas fa-map-marker-alt"></i> <i class="mt-1 mr-2 fas fa-plus  fa-1x ">   </i></a>
                         </button>
-                        <div class="collapse rounded" id="faq1">
+                        <div class="collapse rounded col-12" id="faq1">
                             <div class="card card-body  col-sm-12 col-md-12 rounded">
-                                <div class="form-group bg-light p-2 rounded">
+                                <div class="form-group bg-light p-2 rounded bg-success">
                                     <label  for="rua">Rua:</label>
                                     <input type="text" class="form-control" id="rua" placeholder="insira o nome da rua" name="rua" >
 
@@ -107,8 +114,9 @@
 
                     </div>
             </section>
+            <input type="submit" class="btn btn-primary mt-2 mb-3 col-12">
             </div>
-        <input type="submit" class="btn btn-primary mt-2">
+
     </form>
 
 

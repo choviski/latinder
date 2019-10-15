@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comentario;
+use App\Interesse;
 use App\Publicacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,7 @@ class TimeLineController extends Controller
 )as tempo
    "))->orderBy('created_at', 'desc')->get();
         $comentario=Comentario::all();
-        return view("home")->with(["publicacoes"=>$publicacoes,"Usuario"=>$usuario,"comentarios"=>$comentario]);
+        $interesse=Interesse::all();
+        return view("home")->with(["publicacoes"=>$publicacoes,"Usuario"=>$usuario,"comentarios"=>$comentario,"interesses"=>$interesse]);
     }
 }

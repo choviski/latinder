@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interesse;
 use App\Publicacao;
 use Illuminate\Http\Request;
 
@@ -69,8 +70,9 @@ class PublicacaoController extends Controller
      */
     public function destroy(Request $request)
     {
+
         Publicacao::destroy($request->id);
-        return redirect("timeLine");
+        return redirect(route("timeLine"));
 
     }
 }

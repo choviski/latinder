@@ -66,18 +66,30 @@
             <label  for="idade">Idade:</label>
             <input type="number" class="form-control" id="idade" name="idade" value="{{$animal->idade}}">
 
-            <label  for="imagem">Imagem:</label>
-            <input type="imagem" class="form-control" id="imagem" value="{{$animal->imagem}}" name="imagem" required>
+            <label  for="Imagem">Imagem:</label>
+            <img
+               class="border mt-2" src="../../../{{$animal->imagem}}"width="150px"><br>
 
             <label  for="descricao">Descrição:</label>
             <textarea class="form-control" id="descricao" rows="3" name="descricao" >{{$animal->descricao}}</textarea>
 
 
             <label  for="raca">Raça:</label>
-            <input type="number" class="form-control" id="raca" value="{{$animal->id_racas}}" name="id_raca" required>
+            <select class="form-control" id="raca" name="id_raca" required>
+                <option selected value="{{$animal->id_raca}}" >Manter mesma raça</option>
+                @foreach($racas as $racas)
+                    <option value="{{$racas->id}}">{{$racas->nome}}</option>
+                @endforeach
+            </select>
+
 
             <label  for="endereco">Endereco:</label>
-            <input type="number" class="form-control" id="endereco" value="{{$animal->id_endereco}}" name="id_enderecos" required>
+            <select name="id_endereco" class="form-control" id="endereco">
+                    <option selected value="{{$animal->id_endereco}}">Manter mesmo endereço</option>
+                @foreach($enderecos as $endereco)
+                    <option value="{{$endereco->id}}">{{$endereco->rua}}</option>
+                @endforeach
+            </select>
 
             <input type="submit" class="btn btn-primary mt-2">
 
