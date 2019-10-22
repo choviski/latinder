@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Animal;
 use App\Endereco;
 use App\Publicacao;
+use App\Racas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use File;
@@ -25,7 +26,9 @@ class AnimalController extends Controller
      */
     public function create()
     {
-        return view("animal.create");
+        $raca=Racas::all();
+        $endereco=Endereco::all();
+        return view("animal.create")->with(["enderecos"=>$endereco,"racas"=>$raca]);
     }
 
     /**
@@ -95,8 +98,10 @@ public function criar(Request $request){
      */
     public function edit($id)
     {
+        $raca=Racas::all();
+        $endereco=Endereco::all();
         $animal=Animal::find($id);
-        return view('animal.edit')->with(["animal"=>$animal]);
+        return view('animal.edit')->with(["animal"=>$animal,"enderecos"=>$endereco,"racas"=>$raca]);
     }
 
     /**
@@ -109,7 +114,7 @@ public function criar(Request $request){
     public function update(Request $request, $id)
     {
         Animal::find($id)->update($request->all());
-        return redirect()->Route("animal.index");
+        return redirect()->Route("timeLine");
     }
 
     /**
@@ -123,4 +128,6 @@ public function criar(Request $request){
         Animal::destroy($request->id);
         return redirect("/animal");
     }
+
+
 }

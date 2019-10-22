@@ -26,12 +26,12 @@ class InteresseController extends Controller
     $interesse= new Interesse();
     $interesse->id_publicacao=$publicacao->id;
     $interesse->id_usuario=$usuario->id;
+
     $interesse->save();
 }
     public function listar()
     {
         $usuario = session()->get("Usuario");
-
         $interesse=Interesse::where('id_usuario','=',$usuario->id)->orderBy('created_at', 'desc')->get();
         return view("perfilcominteresses")->with(["interesses"=>$interesse,"usuario"=>$usuario]);
     }

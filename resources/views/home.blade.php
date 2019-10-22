@@ -21,20 +21,33 @@
     <div class="container-fluid">
         <div class="row d-flex justify-content-center">
             <!-- INICIO DO CORPO DA POSTAGEM -->
-            <div class="col-md-8 col-sm-10 col-lg-7 col-11 bg-light rounded shadow mt-md-2 mt-2 mb-1">
-                <div class="col-12 text-muted p-2">
+            <div  class="col-md-8 col-sm-10 col-lg-7 col-11 bg-light rounded-right shadow mt-md-2 mt-2 mb-5" style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;" >
+                <div class="col-12 mt-2 text-muted p-2">
                     <img class="rounded-circle border text" src="{{$publicacao->usuario->imagem}}" width="80px">
                     <a class="ml-3 mt-5" style="font-family: 'Roboto', sans-serif; font-size:30px ">{{$publicacao->usuario->nome}}</a>
-                    {{$publicacao->tempo}}
-                    <form method="post" action="/publicacao/remover/{{$publicacao->id}}" onsubmit="return confirm('Tem certeza que deseja excluir essa publicacao ?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                    </form>
+                    <div class="border p-0 mt-1 mb-1" style="border-radius: 50px">
+                    <p class="display-4 text-center">{{$publicacao->animal->nome}}</p>
+                    </div>
+                    <p class="text-right"> <i class="fas fa-clock mb-1 mr-1"></i> {{$publicacao->tempo}}</p>
+                    @if($Usuario->id == $publicacao->usuario->id)
+                        <div class="float-right">
+
+                            <form method="post" action="/publicacao/remover/{{$publicacao->id}}" onsubmit="return confirm('Tem certeza que deseja excluir essa publicacao ?')">
+                                @csrf
+                                @method('DELETE')
+                                <a class="btn btn-info" href="/animal/{{$publicacao->animal->id}}/edit/"><i class="far fa-edit"></i></a>
+                                <button class="btn btn-danger "><i class="fas fa-trash"></i></button>
+                            </form>
+
+
+                     </div>
+                    @endif
                 </div>
-                <div class="rounded">
+
+                <div class="rounded border">
                     <img src="{{$publicacao->animal->imagem}}" class="rounded" width="100%">
                 </div>
+
                 <div class="mt-3">
                     <a class="tag">Pelagem é {{$publicacao->animal->pelagem}}</a>
                     <a class="tag"> É vacinado? {{$publicacao->animal->vacinacao}}</a>
@@ -49,25 +62,40 @@
                         <a><i class="fas fa-map-marker-alt"></i> {{$publicacao->animal->endereco->rua}}</a>
                     </div>
                     <div class="mt-3 pb-2 ">
+                        <i class="far fa-heart fa-2x border border-primary rounded-circle p-2" id="like{{$publicacao->id}}" onclick="like({{$publicacao->id}})"></i>
+                       @foreach($interesses as $interesse)
+                                @if($interesse->id_publicacao == $publicacao->id && $Usuario->id == $interesse->id_usuario)
+                                <i class="fas fa-heart fa-2x border border-primary rounded-circle p-2"></i>
+                                    <script>
+                                        $("#like{{$publicacao->id}}").remove();
+                                    </script>
+                                @endif
+                        @endforeach
 
-                            <i class="far fa-heart fa-2x border border-primary rounded-circle p-2" id="like{{$publicacao->id}}" onclick="like({{$publicacao->id}})"></i>
 
-         @foreach($comentarios as $comentario)
-                        @if($comentario->id_publicacao == $publicacao->id)
-                            <div><img src="{{$comentario->usuario->imagem}}" width="50px" class="rounded-circle">{{$comentario->usuario->nome}}:{{$comentario->conteudo}}</div>
-                                <form method="post" action="/comentario/remover/{{$comentario->id}}" onsubmit="return confirm('Tem certeza que deseja excluir seu comentario?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                </form>
-                            @endif
 
-                    @endforeach
+
+                        <hr>
+                        <div id="divComentarios{{$publicacao->id}}" class="p-2">
+
+                            @foreach($comentarios as $comentario)
+                                @if($comentario->id_publicacao == $publicacao->id)
+                                    <div class="row">
+                                        <div class="col-12 border p-1  mt-1" style="border-radius: 50px">
+                                            <img src="{{$comentario->usuario->imagem}}" width="50px" class="rounded-circle ">
+                                            <a class=""><b>{{$comentario->usuario->nome}}</b>: {{$comentario->conteudo}}</a>
+                                        </div>
+                                    </div>
+                                @endif
+
+                            @endforeach
+
+                        </div>
+
                         @csrf
                         <input type="hidden" value="{{$publicacao->id}}" name="publicacao" id="id{{$publicacao->id}}">
-        <textarea class="rounded w-100" placeholder="Insira seu comentario aqui....." style="height: 150px;" name="conteudo" id="conteudo{{$publicacao->id}}"></textarea>
-                        <input type="submit" value="Comentar" class="btn btn-outline-primary mb-3 col-sm-12 col-md-12 col-lg-12" onclick="comentar({{$publicacao->id}})">
-</form>
+                            <textarea class="rounded w-100" placeholder="Insira seu comentario aqui....." style="height: 150px;resize: none" name="conteudo" id="conteudo{{$publicacao->id}}"></textarea>
+                        <input type="submit" value="Comentar" class="btn btn-outline-primary mb-5 col-sm-12 col-md-12 col-lg-12" onclick="comentar({{$publicacao->id}})">
                 </div>
             </div>
 
@@ -76,7 +104,6 @@
         </div>
     </div>
 <script
-
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"
@@ -91,6 +118,7 @@
             function () {
                 document.getElementById("like"+id).classList.remove("far");
                 document.getElementById("like"+id).classList.add("fas");
+                document.getElementById("like"+id).removeAttribute("onclick");
 
             }
         ).fail(
@@ -102,15 +130,18 @@
     function comentar(id){
         var publicacao = $('#id'+id).val();
         var conteudo = $('#conteudo'+id).val();
+
         $.ajax({
             url:'/comentar/'+publicacao+'/'+conteudo,
         }).done(
             function (data) {
-               alert("vc comentou....eeeeee")
+                $("#divComentarios"+id).append(" <div class=\"row\"><div class=\"col-12 border p-1  mt-1\" style=\"border-radius: 50px\"><img src=\"{{$Usuario->imagem}}\" width=\"50px\" class=\"rounded-circle\"><a class='ml-1'><b>{{$Usuario->nome}}</b>: "+conteudo+" </div></div>");
+                $('#conteudo'+id).val("");
+
             }
         ).fail(
             function () {
-                alert("erro");
+                alert("erro ao comentar");
             }
         );
     }

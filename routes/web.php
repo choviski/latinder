@@ -19,7 +19,7 @@ Route::delete('/usuarios_has_usuarios/remover/{id}', "UsuarioHasUsuariosControll
 Route::resource("/interesse","InteresseController",['except'=>'destroy'])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/interesse/remover/{id}', "InteresseController@destroy")->middleware(CheckSession::class,CheckAdm::class);
 Route::resource("/publicacao","PublicacaoController",['except'=>'destroy'])->middleware(CheckSession::class,CheckAdm::class);
-Route::delete('/publicacao/remover/{id}', "PublicacaoController@destroy")->middleware(CheckSession::class,CheckAdm::class);
+Route::delete('/publicacao/remover/{id}', "PublicacaoController@destroy")->middleware(CheckSession::class);
 Route::resource("/comentario","ComentarioController",['except'=>'destroy'])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/comentario/remover/{id}', "ComentarioController@destroy")->middleware(CheckSession::class,CheckAdm::class);
 Route::get('/timeLine',"TimeLineController@timeLine")->middleware(CheckSession::class)->name("timeLine");
