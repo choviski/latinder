@@ -31,61 +31,47 @@
             background-size:cover;
         }
 
-        @media screen and (min-width: 1440px){
-            #ul{
-                margin-left: 25%;
-                transform: translateX(-10%);
-            }
-        }
+
 
 
 
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light text-bg " style="height: 100px">
-    <a class="navbar-brand" href="#">
-        <img src="images/Latinder logo.png" width="250px">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse bg-light text-center p-2" style="z-index: 10" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0" id="ul" >
-            <li class="nav-item">
-                <a class="nav-link" href="{{route("timeLine")}}"><h4 style="font-family: 'Roboto', sans-serif;">HOME</h4></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route("cadastrar")}}"><h4 style="font-family: 'Roboto', sans-serif;">PERFIL</h4></a>
-            </li>
-
-            @if($Usuario->perfil > 1)
-
-
-            <li class="nav-item">
-                <a class="nav-link" href="/gerenciar_entidades"><h4 style="font-family: 'Roboto', sans-serif;">ENTIDADES</h4></a>
-            </li>
-            @endif
-            <li class="nav-item">
-                <a class="nav-link" href="/cuidados_basicos"><h4 style="font-family: 'Roboto', sans-serif;">CUIDADOS BÁSICOS</h4></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/direitos_dos_animais"><h4 style="font-family: 'Roboto', sans-serif;">DIREITO DOS ANIMAIS</h4></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route("sair")}}"><h4 style="font-family: 'Roboto', sans-serif;">SAIR</h4></a>
-            </li>
-        </ul>
-
-        <form class="form-inline my-2 my-lg-0  d-flex justify-content-center">
-            <input class="form-control mr-sm-2 col-sm-8 " type="search" placeholder="Insira os dados">
-            <button class="btn btn-outline-primary my-2 my-sm-0 " type="submit"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
-
-
-</nav>
+<header class="sticky-top container p-0 col-12">
+    <nav class="col-12 navbar navbar-expand-lg navbar-light bg-white text-bg " id="myHeader" style="height: 150px; width: 100%;">
+        <a class="navbar-brand" href="#">
+            <img src="images/Latinder logo.png" width="250px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-center bg-white " style="z-index: 10" id="navbarTogglerDemo02">
+            <ul class="navbar-nav" id="ul" >
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route("timeLine")}}"><h4 style="font-family: 'Roboto', sans-serif;">HOME</h4></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route("cadastrar")}}"><h4 style="font-family: 'Roboto', sans-serif;">PERFIL</h4></a>
+                </li>
+                @if($Usuario->perfil > 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gerenciar_entidades"><h4 style="font-family: 'Roboto', sans-serif;">ENTIDADES</h4></a>
+                    </li>
+                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="/cuidados_basicos"><h4 style="font-family: 'Roboto', sans-serif;">CUIDADOS BÁSICOS</h4></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/direitos_dos_animais"><h4 style="font-family: 'Roboto', sans-serif;">DIREITO DOS ANIMAIS</h4></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route("sair")}}"><h4 style="font-family: 'Roboto', sans-serif;">SAIR</h4></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 <div style="margin-top: 100px"></div>
 @yield('content')
 

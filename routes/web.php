@@ -1,7 +1,9 @@
 <?php
 use App\Http\Middleware\CheckAdm;
 use App\Http\Middleware\CheckSession;
-
+Route::get('/teste', function(){
+    return view('teste');
+});
 Route::resource('/usuario', 'UsuarioController' , ['except' => 'destroy','create','store'])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/usuario/remover/{id}', "UsuarioController@destroy")->middleware(CheckSession::class,CheckAdm::class);
 Route::get('/usuario/create', "UsuarioController@create")->name("cadastroUsuario");
@@ -18,6 +20,7 @@ Route::resource("/usuarios_has_usuarios","UsuarioHasUsuariosController",['except
 Route::delete('/usuarios_has_usuarios/remover/{id}', "UsuarioHasUsuariosController@destroy")->middleware(CheckSession::class,CheckAdm::class);
 Route::resource("/interesse","InteresseController",['except'=>'destroy'])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/interesse/remover/{id}', "InteresseController@destroy")->middleware(CheckSession::class,CheckAdm::class);
+Route::delete('/interesse/removerAjax/{id}', "InteresseController@destroyAjax")->middleware(CheckSession::class);
 Route::resource("/publicacao","PublicacaoController",['except'=>'destroy'])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/publicacao/remover/{id}', "PublicacaoController@destroy")->middleware(CheckSession::class);
 Route::resource("/comentario","ComentarioController",['except'=>'destroy'])->middleware(CheckSession::class,CheckAdm::class);

@@ -26,8 +26,10 @@ class InteresseController extends Controller
     $interesse= new Interesse();
     $interesse->id_publicacao=$publicacao->id;
     $interesse->id_usuario=$usuario->id;
-
     $interesse->save();
+    return Response()->json([
+        'novoInteresse' => $interesse->id,
+    ]);
 }
     public function listar()
     {
@@ -57,8 +59,21 @@ class InteresseController extends Controller
 
     public function destroy(Request $request)
     {
+       Interesse::destroy($request->id);
+       return redirect("/interesse");
+
+    }
+    public function destroyAjax (Request $request)
+    {
+        $id = $request->id;
+        $novoInteresse = Interesse::find($id);
         Interesse::destroy($request->id);
-        return redirect("/interesse");
+
+        return Response()->json([
+            'novoInteresse' => $novoInteresse->id_publicacao,
+        ]);
+
+
 
     }
 

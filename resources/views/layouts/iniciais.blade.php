@@ -29,10 +29,20 @@
         #logo{
             width:100%;
         }
+        @media screen and (min-width: 250px){
+            #warp-body{
+                margin-top: 200px;
+            }
+        }
+        @media screen and (min-width: 1280px){
+            #warp-body{
+                margin-top: 0px;
+            }
+        }
     </style>
 </head>
 <body class="container-fluid ">
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center" id="warp-body" style="">
         <div class=" col-md-6 col-sm10 text-center" style="margin-top: 10%;transform: translateY(-20%)">
             <img src="../images/Latinder Logo.png"  class="mt-5 mb-5 mb-md-0 mb-lg-0" id="logo">
             @yield('content')
