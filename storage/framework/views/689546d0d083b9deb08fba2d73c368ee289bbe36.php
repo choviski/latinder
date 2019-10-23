@@ -64,18 +64,30 @@
             <label  for="idade">Idade:</label>
             <input type="number" class="form-control" id="idade" name="idade" value="<?php echo e($animal->idade); ?>">
 
-            <label  for="imagem">Imagem:</label>
-            <input type="imagem" class="form-control" id="imagem" value="<?php echo e($animal->imagem); ?>" name="imagem" required>
+            <label  for="Imagem">Imagem:</label>
+            <img
+               class="border mt-2" src="../../../<?php echo e($animal->imagem); ?>"width="150px"><br>
 
             <label  for="descricao">Descrição:</label>
             <textarea class="form-control" id="descricao" rows="3" name="descricao" ><?php echo e($animal->descricao); ?></textarea>
 
 
             <label  for="raca">Raça:</label>
-            <input type="number" class="form-control" id="raca" value="<?php echo e($animal->id_racas); ?>" name="id_raca" required>
+            <select class="form-control" id="raca" name="id_raca" required>
+                <option selected value="<?php echo e($animal->id_raca); ?>" >Manter mesma raça</option>
+                <?php $__currentLoopData = $racas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $racas): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($racas->id); ?>"><?php echo e($racas->nome); ?></option>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </select>
+
 
             <label  for="endereco">Endereco:</label>
-            <input type="number" class="form-control" id="endereco" value="<?php echo e($animal->id_endereco); ?>" name="id_enderecos" required>
+            <select name="id_endereco" class="form-control" id="endereco">
+                    <option selected value="<?php echo e($animal->id_endereco); ?>">Manter mesmo endereço</option>
+                <?php $__currentLoopData = $enderecos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $endereco): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($endereco->id); ?>"><?php echo e($endereco->rua); ?></option>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </select>
 
             <input type="submit" class="btn btn-primary mt-2">
 

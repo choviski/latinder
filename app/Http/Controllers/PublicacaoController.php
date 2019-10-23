@@ -71,6 +71,11 @@ class PublicacaoController extends Controller
     public function destroy(Request $request)
     {
 
+        $publicacao=Publicacao::where('id','=',$request->id)->get();
+        $interesses=Interesse::where('id_publicacao','=',$publicacao[0]->id)->get();
+        foreach ($interesses as $interesse) {
+            Interesse::destroy($interesse->id);
+        }
         Publicacao::destroy($request->id);
         return redirect(route("timeLine"));
 

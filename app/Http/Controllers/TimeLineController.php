@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cidade;
 use App\Comentario;
 use App\Interesse;
 use App\Publicacao;
