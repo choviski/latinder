@@ -21,30 +21,42 @@
     <?php $__currentLoopData = $publicacaos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $publicacao): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="container-fluid">
             <div class="row d-flex justify-content-center">
+                <div  class="col-md-8 col-sm-10 col-lg-7 col-11 bg-light rounded-right shadow mt-md-2 mt-2 mb-5" style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;" >
+                    <div class="col-12 mt-2 text-muted p-2">
+                        <div class="border p-0 mt-1 mb-1" style="border-radius: 50px">
+                            <p class="display-4 text-center"><?php echo e($publicacao->animal->nome); ?></p>
+                        </div>
+                        <?php if($usuario->id == $publicacao->usuario->id): ?>
+                            <div class="float-right">
 
-                <div class="col-md-8 col-sm-10 col-lg-7 col-11 bg-light rounded shadow mt-md-5 mt-2 mb-1">
-                    <div class="col-12 text-muted p-2">
-                        <img class="rounded-circle border text" src=<?php echo e($publicacao->usuario->imagem); ?> width="80px">
-                        <a class="ml-3 mt-5" style="font-family: 'Roboto', sans-serif; font-size:30px "><?php echo e($publicacao->usuario->nome); ?></a>
+                                <form method="post" action="/publicacao/remover/<?php echo e($publicacao->id); ?>" onsubmit="return confirm('Tem certeza que deseja excluir essa publicacao ?')">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>
+                                    <a class="btn btn-info" href="/animal/<?php echo e($publicacao->animal->id); ?>/edit/"><i class="far fa-edit"></i></a>
+                                    <button class="btn btn-danger "><i class="fas fa-trash"></i></button>
+                                </form>
+
+
+                            </div>
+                        <?php endif; ?>
                     </div>
-                    <div class="rounded">
+
+                    <div class="rounded border">
                         <img src="<?php echo e($publicacao->animal->imagem); ?>" class="rounded" width="100%">
                     </div>
-                    <div class="mt-3">
-                        <div class="mt-3">
-                            <a class="tag">Pelagem é <?php echo e($publicacao->animal->pelagem); ?></a>
-                            <a class="tag"> É vacinado? <?php echo e($publicacao->animal->vacinacao); ?></a>
-                            <a class="tag">Seu porte é <?php echo e($publicacao->animal->porte); ?></a>
-                            <a class="tag">Seu pelo é <?php echo e($publicacao->animal->cor); ?></a>
-                            <a class="tag"><?php echo e($publicacao->animal->sexo); ?></a>
-                            <a class="tag">É castrado? <?php echo e($publicacao->animal->catracao); ?></a>
-                            <div class="mt-3 pb-2">
-                                <a><?php echo e($publicacao->animal->descricao); ?></a>
-                            </div>
-                            <div class="mt-3 pb-2">
-                                <a><?php echo e($publicacao->animal->endereco->rua); ?></a>
-                            </div>
 
+                    <div class="mt-3">
+                        <a class="tag">Pelagem é <?php echo e($publicacao->animal->pelagem); ?></a>
+                        <a class="tag"> É vacinado? <?php echo e($publicacao->animal->vacinacao); ?></a>
+                        <a class="tag">Seu porte é <?php echo e($publicacao->animal->porte); ?></a>
+                        <a class="tag">Seu pelo é <?php echo e($publicacao->animal->cor); ?></a>
+                        <a class="tag"><?php echo e($publicacao->animal->sexo); ?></a>
+                        <a class="tag">É castrado? <?php echo e($publicacao->animal->catracao); ?></a>
+                        <div class="mt-3 pb-2">
+                            <a><?php echo e($publicacao->animal->descricao); ?></a>
+                        </div>
+                        <div class="mt-3 pb-2 mb-5">
+                            <a><i class="fas fa-map-marker-alt"></i> <?php echo e($publicacao->animal->endereco->rua); ?></a>
                         </div>
                     </div>
 

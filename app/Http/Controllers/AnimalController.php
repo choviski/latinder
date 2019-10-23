@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Animal;
+use App\Cidade;
 use App\Endereco;
 use App\Publicacao;
 use App\Racas;
@@ -24,11 +25,36 @@ class AnimalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $raca=Racas::all();
-        $endereco=Endereco::all();
-        return view("animal.create")->with(["enderecos"=>$endereco,"racas"=>$raca]);
+        $animais = Animal::all();
+        $usuario=$request->session()->get("Usuario");
+        $publicacaos=Publicacao::where('id_usuario','=',$usuario->id)->get();
+        $n=-1;
+        if($publicacaos->count()) {
+            $anima[]=0;
+            foreach ($animais as $animal) {
+                foreach ($publicacaos as $publicacao) {
+                    if ($publicacao->id_animal == $animal->id) {
+                        $n = $n + 1;
+                        $anima[$n] = $animal;
+                    }
+                }
+            }
+            $enderecos = Endereco::all();
+            for ($i = 0; $i < sizeof($anima); $i++) {
+                foreach ($enderecos as $endereco) {
+                    if ($endereco->id == $anima[$i]->id_endereco) {
+                        $enderec[$i] = $endereco;
+                    }
+                }
+            }
+        }else{
+            $enderec=0;
+        }
+        $cidades=Cidade::all();
+        return view("animal.create")->with(["enderecos"=>$enderec,"racas"=>$raca,"cidades"=>$cidades]);
     }
 
     /**
@@ -54,11 +80,7 @@ class AnimalController extends Controller
 
     }
 public function criar(Request $request){
-    $animal = Animal::create($request->except(['rua,bairro,id_cidade,compl,cep']));
-    $imagem = Input::file("imagem");
-    $extensao=$imagem->getClientOriginalExtension();
-    $imagem=File::move($imagem,public_path().'/imagem-animal/animal-id'.$animal->id.'.'.$extensao);
-    $animal->imagem='imagem-animal/animal-id'.$animal->id.'.'.$extensao;
+    $animal = Animal::create($request->except(['rua,bairro,id_cidade,compl,cep,id_endereco']));
     if($request->rua){
         $endereco= new Endereco();
         $endereco->rua=$request->rua;
@@ -68,7 +90,14 @@ public function criar(Request $request){
         $endereco->id_cidade=$request->id_cidade;
         $endereco->save();
         $animal->id_endereco=$endereco->id;
+    }else{
+        $animal->id_endereco=$request->id_endereco;
     }
+    $imagem = Input::file("imagem");
+    $extensao=$imagem->getClientOriginalExtension();
+    $imagem=File::move($imagem,public_path().'/imagem-animal/animal-id'.$animal->id.'.'.$extensao);
+    $animal->imagem='imagem-animal/animal-id'.$animal->id.'.'.$extensao;
+
     $animal->save();
     $publicacao = new Publicacao();
     $publicacao->id_animal= $animal->id;

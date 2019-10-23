@@ -58,7 +58,7 @@
                     <a class="nav-link" href="<?php echo e(route("timeLine")); ?>"><h4 style="font-family: 'Roboto', sans-serif;">HOME</h4></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/perfil"><h4 style="font-family: 'Roboto', sans-serif;">PERFIL</h4></a>
+                    <a class="nav-link" href="<?php echo e(route("cadastrar")); ?>"><h4 style="font-family: 'Roboto', sans-serif;">PERFIL</h4></a>
                 </li>
                 <?php if($usuario->perfil > 1): ?>
 

@@ -4,7 +4,7 @@
 
 <?php $__env->startSection('content'); ?>
     <table class="table bg-light rounded">
-        <thead style="background-color:lightgreen">
+        <thead style="background-color:lightskyblue">
         <tr>
             <th scope="col">ID</th>
             <th scope="col">NOME</th>
@@ -31,4 +31,4 @@
 
 
 
-<?php echo $__env->make('../layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\pogramas\latinder\resources\views/cidade/show.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('../layouts/cruds', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\pogramas\latinder\resources\views/cidade/show.blade.php ENDPATH**/ ?>

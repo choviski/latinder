@@ -10,7 +10,7 @@ class CheckAdm
     {
         $usuario=session("Usuario");
         if($usuario->perfil < 2){
-            return redirect()->route('home');
+            return redirect()->route('timeLine');
         }
         return $next($request);
     }
