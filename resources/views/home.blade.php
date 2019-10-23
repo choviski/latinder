@@ -1,8 +1,5 @@
-<script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
-@extends('/layouts/padraohome')
+
+@extends('/layouts/padrao')
 @section('content')
     <style>
         .butn-cad{width: 12%; background-image: url(../imgs/icons/cadastrar.png);background-repeat: no-repeat; background-size: cover; position: fixed;bottom: 5%;right: 5%;z-index: 5;opacity:0.5;}
@@ -29,7 +26,7 @@
                     <p class="display-4 text-center">{{$publicacao->animal->nome}}</p>
                     </div>
                     <p class="text-right"> <i class="fas fa-clock mb-1 mr-1"></i> {{$publicacao->tempo}}</p>
-                    @if($Usuario->id == $publicacao->usuario->id)
+                    @if($usuario->id == $publicacao->usuario->id)
                         <div class="float-right">
 
                             <form method="post" action="/publicacao/remover/{{$publicacao->id}}" onsubmit="return confirm('Tem certeza que deseja excluir essa publicacao ?')">
@@ -48,13 +45,13 @@
                     <img src="{{$publicacao->animal->imagem}}" class="rounded" width="100%">
                 </div>
 
-                <div class="mt-3">
-                    <a class="tag">Pelagem é {{$publicacao->animal->pelagem}}</a>
+                <div class="mt-3 mt-sm-4">
+                    <a class="tag ">Pelagem é {{$publicacao->animal->pelagem}}</a>
                     <a class="tag"> É vacinado? {{$publicacao->animal->vacinacao}}</a>
-                    <a class="tag">Seu porte é {{$publicacao->animal->porte}}</a>
-                    <a class="tag">Seu pelo é {{$publicacao->animal->cor}}</a>
-                    <a class="tag">{{$publicacao->animal->sexo}}</a>
-                    <a class="tag">É castrado? {{$publicacao->animal->catracao}}</a>
+                    <a class="tag ">Seu porte é {{$publicacao->animal->porte}}</a>
+                    <a class="tag ">Seu pelo é {{$publicacao->animal->cor}}</a>
+                    <a class="tag ">{{$publicacao->animal->sexo}}</a>
+                    <a class="tag ">É castrado? {{$publicacao->animal->catracao}}</a>
                     <div class="mt-3 pb-2">
                         <a>{{$publicacao->animal->descricao}}</a>
                     </div>
@@ -63,9 +60,10 @@
                     </div>
                     <div class="mt-3 pb-2 ">
                         <i class="far fa-heart fa-2x border border-primary rounded-circle p-2" id="like{{$publicacao->id}}" onclick="like({{$publicacao->id}})"></i>
+
                        @foreach($interesses as $interesse)
-                                @if($interesse->id_publicacao == $publicacao->id && $Usuario->id == $interesse->id_usuario)
-                                <i class="fas fa-heart fa-2x border border-primary rounded-circle p-2"></i>
+                                @if($interesse->id_publicacao == $publicacao->id && $usuario->id == $interesse->id_usuario)
+                                <i class="fas fa-heart fa-2x border border-primary rounded-circle p-2" id="like{{$interesse->id}}" onclick="deslike({{$interesse->id}})"></i>
                                     <script>
                                         $("#like{{$publicacao->id}}").remove();
                                     </script>
@@ -115,11 +113,11 @@
         $.ajax({
             url:'/interesses/'+publicacao,
         }).done(
-            function () {
+            function (data) {
                 document.getElementById("like"+id).classList.remove("far");
                 document.getElementById("like"+id).classList.add("fas");
-                document.getElementById("like"+id).removeAttribute("onclick");
-
+                document.getElementById("like"+id).setAttribute('onClick'," deslike("+(data['novoInteresse'])+")");
+                document.getElementById("like"+id).id = "like"+((data['novoInteresse']));
             }
         ).fail(
             function () {
@@ -127,6 +125,29 @@
             }
         );
     }
+    function deslike(id){
+
+        $.ajax({
+            url:'/interesse/removerAjax/'+id,
+            method:'DELETE',
+            data: {
+                "_token": "{{ csrf_token() }}",
+            },
+        }).done(
+            function (data) {
+                console.log(data);
+                document.getElementById("like"+id).classList.remove("fas");
+                document.getElementById("like"+id).classList.add("far");
+                document.getElementById("like"+id).setAttribute('onClick'," like("+(data['novoInteresse'])+")");
+                document.getElementById("like"+id).id = "like"+((data['novoInteresse']));
+            }
+        ).fail(
+            function () {
+                alert("erro");
+            }
+        );
+    }
+
     function comentar(id){
         var publicacao = $('#id'+id).val();
         var conteudo = $('#conteudo'+id).val();
@@ -135,7 +156,7 @@
             url:'/comentar/'+publicacao+'/'+conteudo,
         }).done(
             function (data) {
-                $("#divComentarios"+id).append(" <div class=\"row\"><div class=\"col-12 border p-1  mt-1\" style=\"border-radius: 50px\"><img src=\"{{$Usuario->imagem}}\" width=\"50px\" class=\"rounded-circle\"><a class='ml-1'><b>{{$Usuario->nome}}</b>: "+conteudo+" </div></div>");
+                $("#divComentarios"+id).append(" <div class=\"row\"><div class=\"col-12 border p-1  mt-1\" style=\"border-radius: 50px\"><img src=\"{{$usuario->imagem}}\" width=\"50px\" class=\"rounded-circle\"><a class='ml-1'><b>{{$usuario->nome}}</b>: "+conteudo+" </div></div>");
                 $('#conteudo'+id).val("");
 
             }

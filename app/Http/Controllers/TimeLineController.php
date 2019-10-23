@@ -23,7 +23,7 @@ class TimeLineController extends Controller
 )as tempo
    "))->orderBy('created_at', 'desc')->get();
         $comentario=Comentario::all();
-        $interesse=Interesse::all();
-        return view("home")->with(["publicacoes"=>$publicacoes,"Usuario"=>$usuario,"comentarios"=>$comentario,"interesses"=>$interesse]);
+         $interesse=Interesse::all();
+        return view("home")->with(["publicacoes"=>$publicacoes,"usuario"=>$usuario,"comentarios"=>$comentario,"interesses"=>$interesse]);
     }
 }
