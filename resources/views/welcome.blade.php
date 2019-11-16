@@ -15,5 +15,10 @@
             {{$mensagem}}
         </div>
     @endif
+    @if(!empty($criado))
+        <div class="alert alert-success mt-2">
+            {{$criado}}
+        </div>
+    @endif
 </div>
 @endsection

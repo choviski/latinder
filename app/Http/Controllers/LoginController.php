@@ -10,7 +10,8 @@ class LoginController extends Controller
 {
     public function index(Request $request){
         $mensagem = $request->session()->get("mensagem");
-        return view("welcome",compact("mensagem","mensagem"));
+        $criado=$request->session()->get("criado");
+        return view("welcome")->with(["mensagem"=>$mensagem,"criado"=>$criado]);
     }
     public function entrar(Request $request){
 

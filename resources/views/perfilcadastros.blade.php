@@ -12,13 +12,13 @@
     </style>
     <div class="row">
         <div class="col-4 col-md-2 text-center bg-light border-top border-bottom border-right p-2   ">
-            <a  href="visitar/{{$usuario->id}}"> <img src="{{$usuario->imagem}}" class="rounded-circle border" width="80px">
-                <p class="font-weight-bold">{{$usuario->nome}}</p></a>
+            <a  href="#"> <img src="{{$amigo->imagem}}" class="rounded-circle border" width="80px"></a>
+            <p class="font-weight-bold">{{$amigo->nome}}</p>
         </div>
-        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border-right border p-2"><a href="{{route("cadastrar")}}"><h5 class="mt-4 mt-md-3 text-muted"><u>CADASTROS</u></h5></a></div>
-        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border p-2"><a href="{{route("listar")}}"><h5 class="mt-4 mt-md-3 text-muted ">INTERESSES</h5></a></div>
+        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border-right border p-2"><a href="visitar/{{$amigo->id}}"><h5 class="mt-4 mt-md-3 text-muted"><u>CADASTROS</u></h5></a></div>
+        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border p-2"><a href="{{route("interessea")}}"><h5 class="mt-4 mt-md-3 text-muted ">INTERESSES</h5></a></div>
     </div>
-<!-- ============ AQUI VÃO AS POSTAGENS ============ -->
+    <!-- ============ AQUI VÃO AS POSTAGENS ============ -->
     @foreach($publicacaos as $publicacao)
         <div class="container-fluid">
             <div class="row d-flex justify-content-center">
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="rounded border">
-                        <img src="{{$publicacao->animal->imagem}}" class="rounded" width="100%">
+                        <img src="{{url($publicacao->animal->imagem)}}" class="rounded" width="100%">
                     </div>
 
                     <div class="mt-3">
@@ -65,6 +65,5 @@
                 </div>
             </div>
         </div>
-
-@endforeach
+    @endforeach
 @endsection

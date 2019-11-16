@@ -39,6 +39,10 @@ Route::post('/login','LoginController@entrar');
 Route::get('/comentar/{id}/{conteudo}',"ComentarioController@comentar")->middleware(CheckSession::class)-> name("comentar/{id}/{conteudo}");
 Route::post('/novoAnimal',"AnimalController@criar")->middleware(CheckSession::class)-> name("animar");
 Route::get('/comentar/{id}/{conteudo}',"ComentarioController@comentar")->middleware(CheckSession::class)-> name("comentar/{id}/{conteudo}");
+Route::post('/municipio/{estado}',"CidadeController@municipio")->middleware(CheckSession::class)-> name("municipio/{estado}");
+Route::post('/especie/{especie}',"EspecieController@raca")->middleware(CheckSession::class)-> name("especie/{especie}");
+Route::get('/visitar/{id}',"PublicacaoController@visitar")->middleware(CheckSession::class)-> name("visitar/{id}");
+Route::get('/interessea',"PublicacaoController@interesse")->middleware(CheckSession::class)-> name("interessea");
 
 
 Route::get('/dashboard','DashboardController@getMonthlyAllData')->middleware(CheckSession::class,CheckAdm::class);

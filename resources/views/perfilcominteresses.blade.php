@@ -26,9 +26,9 @@
 
             <div  class="col-md-8 col-sm-10 col-lg-7 col-11 bg-light rounded-right shadow mt-md-2 mt-2 mb-5" style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;" >
                 <div class="col-12 text-muted p-2">
-                    <img class="rounded-circle border text" src="{{$interesse->publicacao->usuario->imagem}}" width="80px">
-
-                    <a class="ml-3 mt-5" style="font-family: 'Roboto', sans-serif; font-size:30px ">{{$interesse->publicacao->usuario->nome}}</a>
+                    <a  href="visitar/{{$interesse->publicacao->usuario->id}}"><img class="rounded-circle border text" src="{{$interesse->publicacao->usuario->imagem}}" width="80px">
+                    </a>
+                        <a class="ml-3 mt-5" style="font-family: 'Roboto', sans-serif; font-size:30px "  href="visitar/{{$interesse->publicacao->usuario->id}}>{{$interesse->publicacao->usuario->nome}}</a>
 
                     <div class="border p-0 mt-1 mb-1" style="border-radius: 50px">
                         <p class="display-4 text-center">{{$interesse->publicacao->animal->nome}}</p>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Interesse;
 use App\Publicacao;
+use App\Usuario;
 use Illuminate\Http\Request;
 
 class PublicacaoController extends Controller
@@ -35,6 +36,14 @@ class PublicacaoController extends Controller
         $usuario = session()->get("Usuario");
         $publicacao=Publicacao::where('id_usuario','=',$usuario->id)->orderBy('created_at', 'desc')->get();
         return view("perfilcomcadastros")->with(["publicacaos"=>$publicacao,"usuario"=>$usuario]);
+    }
+    public function visitar($id){
+        $usuario = session()->get("Usuario");
+        $usuarios=Usuario::find($id);
+        $publicacao=Publicacao::where('id_usuario','=',$usuarios->id)->orderBy('created_at', 'desc')->get();
+         session()->put("amigo",$usuarios);
+        $amigo=session()->get("amigo");
+        return view("perfilcadastros")->with(["amigo"=>$amigo,"publicacaos"=>$publicacao,"usuario"=>$usuario]);
     }
 
     /**
@@ -78,6 +87,13 @@ class PublicacaoController extends Controller
         }
         Publicacao::destroy($request->id);
         return redirect(route("timeLine"));
+
+    }
+    public function interesse(){
+        $usuario=session()->get("Usuario");
+        $amigo=session()->get("amigo");
+        $interesse=Interesse::where('id_usuario','=',$amigo->id)->get();
+        return view("perfilinteresses")->with(["amigo"=>$amigo,"interesses"=>$interesse,"usuario"=>$usuario]);
 
     }
 }

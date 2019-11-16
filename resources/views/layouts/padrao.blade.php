@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="images/Latinder Logo mobile.png">
+    <link rel="icon" href="../../images/Latinder Logo mobile.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -25,7 +25,7 @@
             overflow-x: hidden;
             width: 100%;
             height:100%;
-            background-image: url("images/backgroundGradient.png");
+            background-image: url("../../images/backgroundGradient.png");
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -42,7 +42,7 @@
 <header class="sticky-top container p-0 col-12">
     <nav class="col-12 navbar navbar-expand-lg navbar-light bg-white text-bg " id="myHeader" style="height: 150px; width: 100%;">
         <a class="navbar-brand" href="#">
-            <img src="images/Latinder logo.png" width="250px">
+            <img src="../../images/Latinder logo.png" width="250px">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

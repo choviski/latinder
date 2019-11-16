@@ -69,8 +69,15 @@
             <label for="descricao">Descrição:</label>
             <textarea class="form-control" id="descricao" rows="3" name="descricao" required></textarea>
 
+            <label for="especie">Especie:</label>
+            <select class="form-control" id="especie" name="especie" onchange="{raca()}">
+               <option value=1>Cachorro</option>
+               <option value=2>Gato</option>
+            </select>
+
             <label for="raca">Raça:</label>
-            <select class="form-control" id="raca" name="id_raca" required >
+            <select class="form-control" id="raca" name="id_raca" required disabled>
+                <option>Selecione a raça</option>
                 @foreach($racas as $raca)
                     <option value="{{$raca->id}}">{{$raca->nome}}</option>
                 @endforeach
@@ -114,12 +121,39 @@
                                     <input type="text" class="form-control" id="cep" placeholder="insira o CEP"
                                            name="cep">
 
+                                    <label for="cidade" id="bora">Estado:</label>
+                                    <select name="estado" class="form-control" id="estado" onchange="municipio()">
+                                            <option value="AC">AC</option>
+                                            <option value="AL">AL</option>
+                                            <option value="AP">AP</option>
+                                            <option value="AM">AM</option>
+                                            <option value="BA">BA</option>
+                                            <option value="CE">CE</option>
+                                            <option value="DF">DF</option>
+                                            <option value="ES">ES</option>
+                                            <option value="GO">GO</option>
+                                            <option value="MA">MA</option>
+                                            <option value="MT">MT</option>
+                                            <option value="MS">MS</option>
+                                            <option value="PA">PA</option>
+                                            <option value="PB">PB</option>
+                                            <option value="PE">PE</option>
+                                            <option value="PR">PR</option>
+                                            <option value="PI">PI</option>
+                                            <option value="RJ">RJ</option>
+                                            <option value="RN">RN</option>
+                                            <option value="RS">RS</option>
+                                            <option value="RO">RO</option>
+                                            <option value="RR">RR</option>
+                                            <option value="SC">SC</option>
+                                            <option value="SP">SP</option>
+                                            <option value="SE">SE</option>
+                                            <option value="TO">TO</option>
+                                    </select>
+
                                     <label for="cidade">Cidade:</label>
-                                    <select name="id_cidade" class="form-control" id="cidade">
-                                        <option value="2">ESCOLHA UMA CIDADE</option>
-                                            @foreach($cidades as $cidade)
-                                            <option value="{{$cidade->id}}">{{$cidade->nome}} - {{$cidade->estado}}</option>
-                                        @endforeach
+                                    <select name="id_cidade" class="form-control" id="cidade" disabled>
+                                        <option value="2" id="texto">ESCOLHA UMA CIDADE</option>
                                     </select>
                                 </div>
                             </div>
@@ -132,5 +166,76 @@
         </div>
 
     </form>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"
+    >
+    </script>
+<script>
+    function municipio(){
+        $('#cidade').empty();
+        estado=$("#estado").val();
+        $.ajax({
+            url:'/municipio/'+estado,
+            method:'POST',
+            data: {
+                "_token": "{{ csrf_token() }}",
+            },
+        }).done(
+            function (data) {
+                var cidade = data['cidade'];
+                console.log(cidade);
+                document.getElementById("texto").innerHTML = "ESCOLHA UMA CIDADE"
+                var c = document.getElementById("cidade");
+                c.disabled = false;
+                for (var i=0; i < cidade.length; i++) {
+                    console.log(cidade[i]);
+                    $("#cidade").append($('<option>', {
+                        value: cidade[i]['id'],
+                        text: cidade[i]['nome']
+                    }));
+
+                }
+            }
+        ).fail(
+            function () {
+                alert("erro");
+            }
+        );
+    }
+    </script>
+    <script>
+    function raca(){
+        $('#raca').empty();
+        especie=$("#especie").val();
+        $.ajax({
+            url:'/especie/'+especie,
+            method:'POST',
+            data: {
+                "_token": "{{ csrf_token() }}",
+            },
+        }).done(
+            function (data) {
+                var raca = data['raca'];
+                console.log(raca);
+                var c = $("#raca");
+                c.disabled = false;
+                for (var i=0; i < raca.length; i++) {
+                    console.log(raca[i]);
+                    $("#raca").append($('<option>', {
+                        value: raca[i]['id'],
+                        text: raca[i]['nome']
+                    }));
+
+                }
+            }
+        ).fail(
+            function () {
+                alert("erro");
+            }
+        );
+    }
+</script>
 
 @endsection

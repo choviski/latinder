@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Especie;
+use App\Racas;
 use Illuminate\Http\Request;
 
 class EspecieController extends Controller
 {
+    public function especie($especie){
+        $raca=Racas::select('nome','id')->where('id_especie','=',$especie)->get();
+        return Response()->json([
+            'raca' => $raca,
+        ]);
+
+    }
     public function index()
     {
         $especie = Especie::all();
