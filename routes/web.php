@@ -25,9 +25,10 @@ Route::resource("/publicacao","PublicacaoController",['except'=>'destroy'])->mid
 Route::delete('/publicacao/remover/{id}', "PublicacaoController@destroy")->middleware(CheckSession::class);
 Route::resource("/comentario","ComentarioController",['except'=>'destroy'])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/comentario/remover/{id}', "ComentarioController@destroy")->middleware(CheckSession::class,CheckAdm::class);
+Route::delete('/comentario/removerComAjax/{id}', "ComentarioController@deletarComentarioComAjax")->middleware(CheckSession::class,CheckAdm::class);
 Route::get('/timeLine',"TimeLineController@timeLine")->middleware(CheckSession::class)->name("timeLine");
 Route::get('interesses/{id}',"InteresseController@store")->middleware(CheckSession::class)->name("interesses/{id}");;
-Route::get('listar',"InteresseController@listar")->middleware(CheckSession::class)->name("listar");;
+Route::get('/listar',"InteresseController@listar")->middleware(CheckSession::class)->name("listar");;
 Route::get('cadastrar',"PublicacaoController@listar")->middleware(CheckSession::class)->name("cadastrar");;
 Route::resource("/endereco", "EnderecoController",["except"=>"destroy"])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/endereco/remover/{id}', "EnderecoController@destroy")->middleware(CheckSession::class,CheckAdm::class);
@@ -43,7 +44,7 @@ Route::post('/municipio/{estado}',"CidadeController@municipio")->middleware(Chec
 Route::post('/especie/{especie}',"EspecieController@raca")->middleware(CheckSession::class)-> name("especie/{especie}");
 Route::get('/visitar/{id}',"PublicacaoController@visitar")->middleware(CheckSession::class)-> name("visitar/{id}");
 Route::get('/interessea',"PublicacaoController@interesse")->middleware(CheckSession::class)-> name("interessea");
-
+Route::post('/filtro',"FiltroController@filtrar")->middleware(CheckSession::class)-> name("filtro");
 
 Route::get('/dashboard','DashboardController@getMonthlyAllData')->middleware(CheckSession::class,CheckAdm::class);
 
@@ -54,6 +55,8 @@ Route::get('/sair', "LoginController@sair")->name("sair");
 Route::get('/cadastro', function () {
     return view('cadastro')->middleware(CheckSession::class);
 });
+Route::get('/chatTeste','FiltroController@testeChat');
+Route::get('/chat','FiltroController@conversasChat');
 
 Route::get('/home','HomeController@home')->name("home")->middleware(CheckSession::class);
 Route::get('/perfil','HomeController@perfil')->name("perfil")->middleware(CheckSession::class);

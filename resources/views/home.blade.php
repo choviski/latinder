@@ -119,7 +119,13 @@
                     <a  href="visitar/{{$publicacao->usuario->id}}"> <img class="rounded-circle border text" src="{{$publicacao->usuario->imagem}}" width="80px"></a>
                     <a class="ml-3 mt-5" style="font-family: 'Roboto', sans-serif; font-size:30px " href="visitar/{{$publicacao->usuario->id}}">{{$publicacao->usuario->nome}}</a>
                     <div class="border p-0 mt-1 mb-1" style="border-radius: 50px">
-                    <p class="display-4 text-center">{{$publicacao->animal->nome}}</p>
+                    <p class="display-4 text-center">
+                        @if($publicacao->animal->nome=="")
+                            Sem nome
+                        @else
+                            {{$publicacao->animal->nome}}
+                        @endif
+                    </p>
                     </div>
                     <p class="text-right"> <i class="fas fa-clock mb-1 mr-1"></i> {{$publicacao->tempo}}</p>
                     @if($usuario->id == $publicacao->usuario->id)
@@ -174,10 +180,17 @@
 
                             @foreach($comentarios as $comentario)
                                 @if($comentario->id_publicacao == $publicacao->id)
-                                    <div class="row">
-                                        <div class="col-12 border p-1  mt-1" style="border-radius: 50px">
+                                    <div class="row" id="comentarioN{{$comentario->id}}">
+                                        <div class="col-12 border p-2  mt-1" style="border-radius: 20px;">
+                                            @if($usuario->id == $comentario->id_usuario || $publicacao->id_usuario == $usuario->id)
+                                            <div class="float-right">
+
+                                                    <button class="btn text-danger" onclick="descomentar({{$comentario->id}})">x</button>
+
+                                            </div>
+                                            @endif
                                             <img src="{{$comentario->usuario->imagem}}" width="50px" class="rounded-circle ">
-                                            <a class=""><b>{{$comentario->usuario->nome}}</b>: {{$comentario->conteudo}}</a>
+                                            <p class="col-12 text-break d-inline p-2"><b>{{$comentario->usuario->nome}}</b>: {{$comentario->conteudo}}</p>
                                         </div>
                                     </div>
                                 @endif
@@ -234,7 +247,6 @@
             },
         }).done(
             function (data) {
-                console.log(data);
                 document.getElementById("like"+id).classList.remove("fas");
                 document.getElementById("like"+id).classList.add("far");
                 document.getElementById("like"+id).setAttribute('onClick'," like("+(data['novoInteresse'])+")");
@@ -249,7 +261,6 @@
             }
         );
     }
-
     function comentar(id){
         var publicacao = $('#id'+id).val();
         var conteudo = $('#conteudo'+id).val();
@@ -258,7 +269,7 @@
             url:'/comentar/'+publicacao+'/'+conteudo,
         }).done(
             function (data) {
-                $("#divComentarios"+id).append(" <div class=\"row\"><div class=\"col-12 border p-1  mt-1\" style=\"border-radius: 50px\"><img src=\"{{$usuario->imagem}}\" width=\"50px\" class=\"rounded-circle\"><a class='ml-1'><b>{{$usuario->nome}}</b>: "+conteudo+" </div></div>");
+                $("#divComentarios"+id).append(" <div class=\"row\"><div class=\"col-12 border p-2  mt-1\" style=\"border-radius: 20px\">  <img src=\"{{$usuario->imagem}}\" width=\"50px\" class=\"rounded-circle\"><p class='col-12 text-break d-inline p-2'><b>{{$usuario->nome}}</b>: "+conteudo+"</p> </div></div>");
                 $('#conteudo'+id).val("");
 
             }
@@ -268,6 +279,26 @@
             }
         );
     }
+    function descomentar(id){
+
+        $.ajax({
+            url:'/comentario/removerComAjax/'+id,
+            method:'DELETE',
+            data: {
+                "_token": "{{ csrf_token() }}",
+            },
+        }).done(
+            function () {
+                console.log($("#comentarioN{{$comentario->id}}").remove());
+                $("#comentarioN"+id).remove();
+            }
+        ).fail(
+            function () {
+                alert("erro");
+            }
+        );
+    }
+
 </script>
     </div>
     <div id="snackbar">Animal adicionado aos interesses com sucesso</div>

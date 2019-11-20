@@ -6,6 +6,7 @@ use App\Cidade;
 use App\Comentario;
 use App\Interesse;
 use App\Publicacao;
+use App\Racas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,6 +27,7 @@ class TimeLineController extends Controller
    "))->orderBy('created_at', 'desc')->get();
         $comentario=Comentario::all();
          $interesse=Interesse::all();
-        return view("home")->with(["publicacoes"=>$publicacoes,"usuario"=>$usuario,"comentarios"=>$comentario,"interesses"=>$interesse,"criar"=>$criar]);
+        $racas=Racas::all();
+        return view("home")->with(["publicacoes"=>$publicacoes,"usuario"=>$usuario,"comentarios"=>$comentario,"interesses"=>$interesse,"criar"=>$criar,"racas"=>$racas]);
     }
 }

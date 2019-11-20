@@ -28,6 +28,7 @@ class ComentarioController extends Controller
             'comentario' => $conteudo,
             'imagem'=>$usuario->imagem,
             'nome'=>$usuario->nome,
+            'id_comentario'=>$comentario->id
         ]);
 
         }
@@ -85,6 +86,14 @@ class ComentarioController extends Controller
     {
         Comentario::destroy($request->id);
         return redirect("/timeLine");
+
+    }
+    public function deletarComentarioComAjax(Request $request)
+    {
+
+        Comentario::destroy($request->id);
+
+
 
     }
 }
