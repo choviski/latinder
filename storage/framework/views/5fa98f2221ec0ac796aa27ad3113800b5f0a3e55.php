@@ -14,6 +14,12 @@
 
         </div>
     <?php endif; ?>
+    <?php if(!empty($criado)): ?>
+        <div class="alert alert-success mt-2">
+            <?php echo e($criado); ?>
+
+        </div>
+    <?php endif; ?>
 </div>
 <?php $__env->stopSection(); ?>
 

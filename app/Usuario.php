@@ -23,6 +23,12 @@ class Usuario extends Model
     public function comentario(){
         return $this->hasOne('App\Comentario', 'id_usuario','id');
     }
+    public function mensagem(){
+        return $this->hasOne('App\Mensagem', 'id_destinatario','id');
+    }
+    public function mensagem2(){
+        return $this->hasOne('App\Mensagem', 'id_remetente','id');
+    }
 
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Interesse;
 use App\Publicacao;
+use App\Racas;
 use Illuminate\Http\Request;
 
 class InteresseController extends Controller
@@ -34,8 +35,9 @@ class InteresseController extends Controller
     public function listar()
     {
         $usuario = session()->get("Usuario");
+        $racas = Racas::all();
         $interesse=Interesse::where('id_usuario','=',$usuario->id)->orderBy('created_at', 'desc')->get();
-        return view("perfilcominteresses")->with(["interesses"=>$interesse,"usuario"=>$usuario]);
+        return view("perfilcominteresses")->with(["interesses"=>$interesse,"usuario"=>$usuario,"racas"=>$racas]);
     }
 
     public function show($id)

@@ -1,0 +1,8 @@
+[2019-11-13 09:19:49] local.ERROR: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente.
+ (SQL: select * from `usuarios` where `login` = choviski@gmail.com and `usuarios`.`deleted_at` is null)  
+[2019-11-13 09:19:58] local.ERROR: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente.
+ (SQL: select * from `usuarios` where `login` = choviski@gmail.com and `usuarios`.`deleted_at` is null)  
+[2019-11-13 09:20:48] local.ERROR: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente.
+ (SQL: select * from `usuarios` where `login` = choviski@gmail.com and `usuarios`.`deleted_at` is null)  
+[2019-11-13 09:20:56] local.ERROR: SQLSTATE[HY000] [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente.
+ (SQL: select * from `usuarios` where `login` = choviski@gmail.com and `usuarios`.`deleted_at` is null)  

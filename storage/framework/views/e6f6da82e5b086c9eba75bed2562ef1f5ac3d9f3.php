@@ -40,15 +40,35 @@
                 <canvas class="doughnut-chart3" style="height:400px" id="doughnut-chart-castracao"></canvas>
             </div>
         </div>
-        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 shadow-md" >
+        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 ml-md-1 shadow-md" >
             <div class="table-responsive" >
                 <canvas class="doughnut-chart4" style="height:400px" id="doughnut-chart-castracao"></canvas>
+            </div>
+        </div>
+        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 shadow-md" >
+            <div class="table-responsive" >
+                <canvas class="doughnut-chart5" style="height:400px" id="doughnut-chart-castracao"></canvas>
+            </div>
+        </div>
+        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 shadow-md" >
+            <div class="table-responsive" >
+                <canvas class="doughnut-chart6" style="height:400px" id="doughnut-chart-castracao"></canvas>
+            </div>
+        </div>
+        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 shadow-md" >
+            <div class="table-responsive" >
+                <canvas class="doughnut-chart7" style="height:400px" id="doughnut-chart-castracao"></canvas>
+            </div>
+        </div>
+        <div class="bg-white rounded mb-5 col-md-11 col-sm-12 shadow-md" >
+            <div class="table-responsive" >
+                <canvas class="line-chart3" style="height:400px" id="line-chart-user"></canvas>
             </div>
         </div>
     </div>
 </div>
 
-        <script> // SCRIPT PARA O GRAFICO DO USUARIO //
+    <script> // SCRIPT PARA O GRAFICO DO USUARIO //
 
         var Label=[];
             <?php $__currentLoopData = $dados['meses_usuarios']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $numero =>$valor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -268,6 +288,148 @@
                 }
             }
         });
+    </script>
+
+    <script>
+        var ctx = document.getElementsByClassName("doughnut-chart5");
+        var chartGraph = new Chart(ctx,{
+            type: 'doughnut',
+            data: {
+                labels: ['Curta','Média','Longa'],
+                datasets: [
+                    {
+                        label:'Pelagem dos animais',
+                        backgroundColor: ['#ff000a','#000ee6','#eeff00'],
+                        data: [<?php echo e($dados['animais_pelo_curto']); ?>, <?php echo e($dados['animais_pelo_medio']); ?>, <?php echo e($dados['animais_pelo_longo']); ?>,]
+
+                    }
+                ]
+            },
+            options: {
+                animation:{
+                    animateScale:true
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                title:{
+                    display:true,
+                    fontSize:20,
+                    text:"PELAGEM DOS ANIMAIS"
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementsByClassName("doughnut-chart6");
+        var chartGraph = new Chart(ctx,{
+            type: 'doughnut',
+            data: {
+                labels: ['Pequeno','Médio','Grande'],
+                datasets: [
+                    {
+                        label:'Porte dos animais',
+                        backgroundColor: ['#00ffc6','#77e602','#1bff00'],
+                        data: [<?php echo e($dados['animais_pequenos']); ?>, <?php echo e($dados['animais_medios']); ?>, <?php echo e($dados['animais_grandes']); ?>,]
+
+                    }
+                ]
+            },
+            options: {
+                animation:{
+                    animateScale:true
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                title:{
+                    display:true,
+                    fontSize:20,
+                    text:"PORTE DOS ANIMAIS"
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementsByClassName("doughnut-chart7");
+        var chartGraph = new Chart(ctx,{
+            type: 'doughnut',
+            data: {
+                labels: ['Cachorro','Gato'],
+                datasets: [
+                    {
+                        label:'Espécie dos animais',
+                        backgroundColor: ['#8f00ff','#31a0e6'],
+                        data: [<?php echo e($dados['animais_cachorro']); ?>, <?php echo e($dados['animais_gato']); ?>,]
+
+                    }
+                ]
+            },
+            options: {
+                animation:{
+                    animateScale:true
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                title:{
+                    display:true,
+                    fontSize:20,
+                    text:"ESPÉCIE DOS ANIMAIS"
+                }
+            }
+        });
+    </script>
+
+    <script> // SCRIPT PARA O GRAFICO DA PUBLICACAO //
+
+        var Label=[];
+                <?php $__currentLoopData = $dados['meses_publicacao']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $numero =>$valor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+        var add = Label.push("<?php echo e(($valor)); ?>");
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+        var Publicacao=[];
+                <?php $__currentLoopData = $dados['publicacao']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $numero =>$valor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        var add = Publicacao.push(<?php echo e($valor); ?>);
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
+        var ctx = document.getElementsByClassName("line-chart3");
+        var chartGraph = new Chart(ctx,{
+            type:'line',
+            data: {
+                labels:Label,
+                datasets:[{
+                    label:"PUBLICAÇÕES NO LATINDER",
+                    borderWidth:6,
+                    borderColor: 'rgba(255,0,169,0.5)',
+                    backgroundColor:  'rgba(5,147,255,0.5)',
+                    data:Publicacao,
+                },
+                ]
+            },
+            options:{
+                responsive: true,
+                maintainAspectRatio: false,
+                title:{
+                    display:true,
+                    fontSize:20,
+                    text:"PUBLICAÇÕES FEITAS: <?php echo e($dados['total_publicacao']); ?> "
+                },
+                labels:{
+                    fontStyle:"bold",
+                },
+                scales:{
+                    yAxes:[{
+                        ticks:{
+                            min:0,
+                            beginAtZero:true,
+                        },
+                    }],
+                }
+            }
+        });
+
     </script>
     </body>
     </html>

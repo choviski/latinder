@@ -6,12 +6,14 @@ use App\Cidade;
 use App\Comentario;
 use App\Interesse;
 use App\Publicacao;
+use App\Racas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TimeLineController extends Controller
 {
-    public function timeLine (){
+    public function timeLine (Request $request){
+        $criar = $request->session()->get("criar");
         $usuario = session()->get("Usuario");
         $publicacoes=Publicacao::select(DB::raw("*,if(
     abs (TIMESTAMPDIFF(hour,now(),created_at)) < 1,
@@ -25,6 +27,7 @@ class TimeLineController extends Controller
    "))->orderBy('created_at', 'desc')->get();
         $comentario=Comentario::all();
          $interesse=Interesse::all();
-        return view("home")->with(["publicacoes"=>$publicacoes,"usuario"=>$usuario,"comentarios"=>$comentario,"interesses"=>$interesse]);
+        $racas=Racas::all();
+        return view("home")->with(["publicacoes"=>$publicacoes,"usuario"=>$usuario,"comentarios"=>$comentario,"interesses"=>$interesse,"criar"=>$criar,"racas"=>$racas]);
     }
 }

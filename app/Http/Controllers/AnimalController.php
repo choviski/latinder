@@ -27,7 +27,7 @@ class AnimalController extends Controller
      */
     public function create(Request $request)
     {
-        $raca=Racas::all();
+        $raca=Racas::where('id_especie','=',1);
         $animais = Animal::all();
         $usuario=$request->session()->get("Usuario");
         $publicacaos=Publicacao::where('id_usuario','=',$usuario->id)->get();
@@ -79,6 +79,7 @@ class AnimalController extends Controller
         return redirect("timeLine");
 
     }
+
 public function criar(Request $request){
     $animal = Animal::create($request->except(['rua,bairro,id_cidade,compl,cep,id_endereco']));
     if($request->rua){
@@ -104,6 +105,7 @@ public function criar(Request $request){
     $usuario = session()->get("Usuario");
     $publicacao->id_usuario=$usuario->id;
     $publicacao->save();
+    $request->session()->flash("criar","Publicação criada com sucesso!");
     return redirect("timeLine");
 
 }

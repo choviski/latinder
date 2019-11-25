@@ -42,15 +42,35 @@
                 <canvas class="doughnut-chart3" style="height:400px" id="doughnut-chart-castracao"></canvas>
             </div>
         </div>
-        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 shadow-md" >
+        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 ml-md-1 shadow-md" >
             <div class="table-responsive" >
                 <canvas class="doughnut-chart4" style="height:400px" id="doughnut-chart-castracao"></canvas>
+            </div>
+        </div>
+        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 shadow-md" >
+            <div class="table-responsive" >
+                <canvas class="doughnut-chart5" style="height:400px" id="doughnut-chart-castracao"></canvas>
+            </div>
+        </div>
+        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 shadow-md" >
+            <div class="table-responsive" >
+                <canvas class="doughnut-chart6" style="height:400px" id="doughnut-chart-castracao"></canvas>
+            </div>
+        </div>
+        <div class="bg-white rounded mb-5 col-md-3 col-sm-12 pb-1 shadow-md" >
+            <div class="table-responsive" >
+                <canvas class="doughnut-chart7" style="height:400px" id="doughnut-chart-castracao"></canvas>
+            </div>
+        </div>
+        <div class="bg-white rounded mb-5 col-md-11 col-sm-12 shadow-md" >
+            <div class="table-responsive" >
+                <canvas class="line-chart3" style="height:400px" id="line-chart-user"></canvas>
             </div>
         </div>
     </div>
 </div>
 
-        <script> // SCRIPT PARA O GRAFICO DO USUARIO //
+    <script> // SCRIPT PARA O GRAFICO DO USUARIO //
 
         var Label=[];
             @foreach($dados['meses_usuarios'] as $numero =>$valor)
@@ -270,6 +290,148 @@
                 }
             }
         });
+    </script>
+
+    <script>
+        var ctx = document.getElementsByClassName("doughnut-chart5");
+        var chartGraph = new Chart(ctx,{
+            type: 'doughnut',
+            data: {
+                labels: ['Curta','Média','Longa'],
+                datasets: [
+                    {
+                        label:'Pelagem dos animais',
+                        backgroundColor: ['#ff000a','#000ee6','#eeff00'],
+                        data: [{{$dados['animais_pelo_curto']}}, {{$dados['animais_pelo_medio']}}, {{$dados['animais_pelo_longo']}},]
+
+                    }
+                ]
+            },
+            options: {
+                animation:{
+                    animateScale:true
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                title:{
+                    display:true,
+                    fontSize:20,
+                    text:"PELAGEM DOS ANIMAIS"
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementsByClassName("doughnut-chart6");
+        var chartGraph = new Chart(ctx,{
+            type: 'doughnut',
+            data: {
+                labels: ['Pequeno','Médio','Grande'],
+                datasets: [
+                    {
+                        label:'Porte dos animais',
+                        backgroundColor: ['#00ffc6','#77e602','#1bff00'],
+                        data: [{{$dados['animais_pequenos']}}, {{$dados['animais_medios']}}, {{$dados['animais_grandes']}},]
+
+                    }
+                ]
+            },
+            options: {
+                animation:{
+                    animateScale:true
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                title:{
+                    display:true,
+                    fontSize:20,
+                    text:"PORTE DOS ANIMAIS"
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementsByClassName("doughnut-chart7");
+        var chartGraph = new Chart(ctx,{
+            type: 'doughnut',
+            data: {
+                labels: ['Cachorro','Gato'],
+                datasets: [
+                    {
+                        label:'Espécie dos animais',
+                        backgroundColor: ['#8f00ff','#31a0e6'],
+                        data: [{{$dados['animais_cachorro']}}, {{$dados['animais_gato']}},]
+
+                    }
+                ]
+            },
+            options: {
+                animation:{
+                    animateScale:true
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                title:{
+                    display:true,
+                    fontSize:20,
+                    text:"ESPÉCIE DOS ANIMAIS"
+                }
+            }
+        });
+    </script>
+
+    <script> // SCRIPT PARA O GRAFICO DA PUBLICACAO //
+
+        var Label=[];
+                @foreach($dados['meses_publicacao'] as $numero =>$valor)
+
+        var add = Label.push("{{($valor)}}");
+                @endforeach
+
+        var Publicacao=[];
+                @foreach($dados['publicacao'] as $numero =>$valor)
+        var add = Publicacao.push({{$valor}});
+                @endforeach
+
+
+        var ctx = document.getElementsByClassName("line-chart3");
+        var chartGraph = new Chart(ctx,{
+            type:'line',
+            data: {
+                labels:Label,
+                datasets:[{
+                    label:"PUBLICAÇÕES NO LATINDER",
+                    borderWidth:6,
+                    borderColor: 'rgba(255,0,169,0.5)',
+                    backgroundColor:  'rgba(5,147,255,0.5)',
+                    data:Publicacao,
+                },
+                ]
+            },
+            options:{
+                responsive: true,
+                maintainAspectRatio: false,
+                title:{
+                    display:true,
+                    fontSize:20,
+                    text:"PUBLICAÇÕES FEITAS: {{$dados['total_publicacao']}} "
+                },
+                labels:{
+                    fontStyle:"bold",
+                },
+                scales:{
+                    yAxes:[{
+                        ticks:{
+                            min:0,
+                            beginAtZero:true,
+                        },
+                    }],
+                }
+            }
+        });
+
     </script>
     </body>
     </html>

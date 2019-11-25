@@ -12,6 +12,13 @@ class CidadeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function municipio($estado){
+        $cidades=Cidade::select('nome','id')->where('estado','=',$estado)->get();
+        return Response()->json([
+            'cidade' => $cidades,
+        ]);
+
+    }
     public function index()
     {
         $cidade = Cidade::all();

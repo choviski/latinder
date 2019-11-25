@@ -67,8 +67,15 @@
             <label for="descricao">Descrição:</label>
             <textarea class="form-control" id="descricao" rows="3" name="descricao" required></textarea>
 
+            <label for="especie">Especie:</label>
+            <select class="form-control" id="especie" name="especie" onchange="filtro()">
+               <option value=1>Cachorro</option>
+               <option value=2>Gato</option>
+            </select>
+
             <label for="raca">Raça:</label>
-            <select class="form-control" id="raca" name="id_raca" required >
+            <select class="form-control" id="raca" name="id_raca" required>
+                <option>Selecione a raça</option>
                 <?php $__currentLoopData = $racas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $raca): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <option value="<?php echo e($raca->id); ?>"><?php echo e($raca->nome); ?></option>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -76,7 +83,7 @@
 
             <label for="endereco">Endereco:</label>
             <select name="id_endereco" class="form-control" id="endereco">
-                <option value="2">ESCOLHA UM ENDEREÇO</option>
+                <option value="1">ESCOLHA UM ENDEREÇO</option>
                 <?php if($enderecos!=0): ?>
                     <?php $__currentLoopData = $enderecos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $endereco): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($endereco->id); ?>">Rua: <?php echo e($endereco->rua); ?></option>
@@ -112,12 +119,39 @@
                                     <input type="text" class="form-control" id="cep" placeholder="insira o CEP"
                                            name="cep">
 
+                                    <label for="cidade" id="bora">Estado:</label>
+                                    <select name="estado" class="form-control" id="estado" onchange="municipio()">
+                                            <option value="AC">AC</option>
+                                            <option value="AL">AL</option>
+                                            <option value="AP">AP</option>
+                                            <option value="AM">AM</option>
+                                            <option value="BA">BA</option>
+                                            <option value="CE">CE</option>
+                                            <option value="DF">DF</option>
+                                            <option value="ES">ES</option>
+                                            <option value="GO">GO</option>
+                                            <option value="MA">MA</option>
+                                            <option value="MT">MT</option>
+                                            <option value="MS">MS</option>
+                                            <option value="PA">PA</option>
+                                            <option value="PB">PB</option>
+                                            <option value="PE">PE</option>
+                                            <option value="PR">PR</option>
+                                            <option value="PI">PI</option>
+                                            <option value="RJ">RJ</option>
+                                            <option value="RN">RN</option>
+                                            <option value="RS">RS</option>
+                                            <option value="RO">RO</option>
+                                            <option value="RR">RR</option>
+                                            <option value="SC">SC</option>
+                                            <option value="SP">SP</option>
+                                            <option value="SE">SE</option>
+                                            <option value="TO">TO</option>
+                                    </select>
+
                                     <label for="cidade">Cidade:</label>
-                                    <select name="id_cidade" class="form-control" id="cidade">
-                                        <option value="2">ESCOLHA UMA CIDADE</option>
-                                            <?php $__currentLoopData = $cidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cidade): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($cidade->id); ?>"><?php echo e($cidade->nome); ?> - <?php echo e($cidade->estado); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <select name="id_cidade" class="form-control" id="cidade" disabled>
+                                        <option value="10720" id="texto">ESCOLHA UMA CIDADE</option>
                                     </select>
                                 </div>
                             </div>
@@ -130,6 +164,77 @@
         </div>
 
     </form>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"
+    >
+    </script>
+<script>
+    function municipio(){
+        $('#cidade').empty();
+        estado=$("#estado").val();
+        $.ajax({
+            url:'/municipio/'+estado,
+            method:'POST',
+            data: {
+                "_token": "<?php echo e(csrf_token()); ?>",
+            },
+        }).done(
+            function (data) {
+                var cidade = data['cidade'];
+                console.log(cidade);
+                document.getElementById("texto").innerHTML = "ESCOLHA UMA CIDADE"
+                var c = document.getElementById("cidade");
+                c.disabled = false;
+                for (var i=0; i < cidade.length; i++) {
+                    console.log(cidade[i]);
+                    $("#cidade").append($('<option>', {
+                        value: cidade[i]['id'],
+                        text: cidade[i]['nome']
+                    }));
+
+                }
+            }
+        ).fail(
+            function () {
+                alert("erro");
+            }
+        );
+    }
+    </script>
+    <script>
+        function filtro(){
+            $('#raca').empty();
+            especie=$("#especie").val();
+            $.ajax({
+                url:'/especie/'+especie,
+                method:'POST',
+                data: {
+                    "_token": "<?php echo e(csrf_token()); ?>",
+                },
+            }).done(
+                function (data) {
+                    var raca = data['raca'];
+                    console.log(raca);
+                    var c = document.getElementById("raca");
+                    c.disabled = false;
+                    for (var i=0; i < raca.length; i++) {
+                        console.log(raca[i]);
+                        $("#raca").append($('<option>', {
+                            value: raca[i]['id'],
+                            text: raca[i]['nome']
+                        }));
+
+                    }
+                }
+            ).fail(
+                function () {
+                    alert("erro");
+                }
+            );
+        }
+</script>
 
 <?php $__env->stopSection(); ?>
 

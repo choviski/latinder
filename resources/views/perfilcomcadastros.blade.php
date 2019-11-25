@@ -12,8 +12,8 @@
     </style>
     <div class="row">
         <div class="col-4 col-md-2 text-center bg-light border-top border-bottom border-right p-2   ">
-            <img src="{{$usuario->imagem}}" class="rounded-circle border" width="80px">
-            <p class="font-weight-bold">{{$usuario->nome}}</p>
+            <a  href="visitar/{{$usuario->id}}"> <img src="{{$usuario->imagem}}" class="rounded-circle border" width="80px">
+                <p class="font-weight-bold">{{$usuario->nome}}</p></a>
         </div>
         <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border-right border p-2"><a href="{{route("cadastrar")}}"><h5 class="mt-4 mt-md-3 text-muted"><u>CADASTROS</u></h5></a></div>
         <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border p-2"><a href="{{route("listar")}}"><h5 class="mt-4 mt-md-3 text-muted ">INTERESSES</h5></a></div>
@@ -25,7 +25,13 @@
                 <div  class="col-md-8 col-sm-10 col-lg-7 col-11 bg-light rounded-right shadow mt-md-2 mt-2 mb-5" style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;" >
                     <div class="col-12 mt-2 text-muted p-2">
                         <div class="border p-0 mt-1 mb-1" style="border-radius: 50px">
-                            <p class="display-4 text-center">{{$publicacao->animal->nome}}</p>
+                            <p class="display-4 text-center">
+                                @if($publicacao->animal->nome=="")
+                                    Sem nome
+                                @else
+                                    {{$publicacao->animal->nome}}
+                                @endif
+                            </p>
                         </div>
                         @if($usuario->id == $publicacao->usuario->id)
                             <div class="float-right">
@@ -64,5 +70,7 @@
 
                 </div>
             </div>
+        </div>
+
 @endforeach
 @endsection
