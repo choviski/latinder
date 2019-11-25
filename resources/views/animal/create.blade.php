@@ -70,13 +70,13 @@
             <textarea class="form-control" id="descricao" rows="3" name="descricao" required></textarea>
 
             <label for="especie">Especie:</label>
-            <select class="form-control" id="especie" name="especie" onchange="{raca()}">
+            <select class="form-control" id="especie" name="especie" onchange="filtro()">
                <option value=1>Cachorro</option>
                <option value=2>Gato</option>
             </select>
 
             <label for="raca">Raça:</label>
-            <select class="form-control" id="raca" name="id_raca" required disabled>
+            <select class="form-control" id="raca" name="id_raca" required>
                 <option>Selecione a raça</option>
                 @foreach($racas as $raca)
                     <option value="{{$raca->id}}">{{$raca->nome}}</option>
@@ -85,7 +85,7 @@
 
             <label for="endereco">Endereco:</label>
             <select name="id_endereco" class="form-control" id="endereco">
-                <option value="2">ESCOLHA UM ENDEREÇO</option>
+                <option value="1">ESCOLHA UM ENDEREÇO</option>
                 @if($enderecos!=0)
                     @foreach($enderecos as $endereco)
                         <option value="{{$endereco->id}}">Rua: {{$endereco->rua}}</option>
@@ -153,7 +153,7 @@
 
                                     <label for="cidade">Cidade:</label>
                                     <select name="id_cidade" class="form-control" id="cidade" disabled>
-                                        <option value="2" id="texto">ESCOLHA UMA CIDADE</option>
+                                        <option value="10720" id="texto">ESCOLHA UMA CIDADE</option>
                                     </select>
                                 </div>
                             </div>
@@ -206,36 +206,36 @@
     }
     </script>
     <script>
-    function raca(){
-        $('#raca').empty();
-        especie=$("#especie").val();
-        $.ajax({
-            url:'/especie/'+especie,
-            method:'POST',
-            data: {
-                "_token": "{{ csrf_token() }}",
-            },
-        }).done(
-            function (data) {
-                var raca = data['raca'];
-                console.log(raca);
-                var c = $("#raca");
-                c.disabled = false;
-                for (var i=0; i < raca.length; i++) {
-                    console.log(raca[i]);
-                    $("#raca").append($('<option>', {
-                        value: raca[i]['id'],
-                        text: raca[i]['nome']
-                    }));
+        function filtro(){
+            $('#raca').empty();
+            especie=$("#especie").val();
+            $.ajax({
+                url:'/especie/'+especie,
+                method:'POST',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+            }).done(
+                function (data) {
+                    var raca = data['raca'];
+                    console.log(raca);
+                    var c = document.getElementById("raca");
+                    c.disabled = false;
+                    for (var i=0; i < raca.length; i++) {
+                        console.log(raca[i]);
+                        $("#raca").append($('<option>', {
+                            value: raca[i]['id'],
+                            text: raca[i]['nome']
+                        }));
 
+                    }
                 }
-            }
-        ).fail(
-            function () {
-                alert("erro");
-            }
-        );
-    }
+            ).fail(
+                function () {
+                    alert("erro");
+                }
+            );
+        }
 </script>
 
 @endsection

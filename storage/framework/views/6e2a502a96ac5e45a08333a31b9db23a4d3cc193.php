@@ -11,13 +11,13 @@
     </style>
     <div class="row">
         <div class="col-4 col-md-2 text-center bg-light border-top border-bottom border-right p-2   ">
-            <a  href="visitar/<?php echo e($usuario->id); ?>"> <img src="<?php echo e($usuario->imagem); ?>" class="rounded-circle border" width="80px">
-                <p class="font-weight-bold"><?php echo e($usuario->nome); ?></p></a>
+            <a  href="#"> <img src="<?php echo e($amigo->imagem); ?>" class="rounded-circle border" width="80px"></a>
+            <p class="font-weight-bold"><?php echo e($amigo->nome); ?></p>
         </div>
-        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border-right border p-2"><a href="<?php echo e(route("cadastrar")); ?>"><h5 class="mt-4 mt-md-3 text-muted"><u>CADASTROS</u></h5></a></div>
-        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border p-2"><a href="<?php echo e(route("listar")); ?>"><h5 class="mt-4 mt-md-3 text-muted ">INTERESSES</h5></a></div>
+        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border-right border p-2"><a href="#"><h5 class="mt-4 mt-md-3 text-muted"><u>CADASTROS</u></h5></a></div>
+        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border p-2"><a href="<?php echo e(route("interessea")); ?>"><h5 class="mt-4 mt-md-3 text-muted ">INTERESSES</h5></a></div>
     </div>
-<!-- ============ AQUI VÃO AS POSTAGENS ============ -->
+    <!-- ============ AQUI VÃO AS POSTAGENS ============ -->
     <?php $__currentLoopData = $publicacaos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $publicacao): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="container-fluid">
             <div class="row d-flex justify-content-center">
@@ -49,7 +49,7 @@
                     </div>
 
                     <div class="rounded border">
-                        <img src="<?php echo e($publicacao->animal->imagem); ?>" class="rounded" width="100%">
+                        <img src="<?php echo e(url($publicacao->animal->imagem)); ?>" class="rounded" width="100%">
                     </div>
 
                     <div class="mt-3">
@@ -71,8 +71,7 @@
                 </div>
             </div>
         </div>
-
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make("layouts/padrao", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\pogramas\latinder\resources\views/perfilcomcadastros.blade.php ENDPATH**/ ?>
+<?php echo $__env->make("layouts/padrao", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\pogramas\latinder\resources\views/perfilcadastros.blade.php ENDPATH**/ ?>

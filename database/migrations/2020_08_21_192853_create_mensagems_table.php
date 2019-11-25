@@ -19,6 +19,8 @@ class CreateMensagemsTable extends Migration
             $table->unsignedBigInteger("id_destinatario");
             $table->foreign("id_destinatario")->references("id")->on("usuarios");
             $table->unsignedBigInteger("id_remetente");
+            $table->unsignedBigInteger("id_conversa");
+            $table->foreign("id_conversa")->references("id")->on("conversas");
             $table->foreign("id_remetente")->references("id")->on("usuarios");
             $table->softDeletes();
             $table->timestamps();

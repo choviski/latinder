@@ -38,12 +38,18 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/helpers/Conexao.php"
         ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "app/helpers/Conexao.php"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

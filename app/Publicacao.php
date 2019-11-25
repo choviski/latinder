@@ -24,5 +24,8 @@ class Publicacao extends Model
     public function comentario(){
         return $this->hasOne('App\Comentario', 'id_publicacao','id');
     }
+    public function mensagem(){
+        return $this->hasOne('App\Publicacao', 'id_publicacao','id');
+    }
     use SoftDeletes;
 }

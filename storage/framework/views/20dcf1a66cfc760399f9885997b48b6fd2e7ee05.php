@@ -67,13 +67,73 @@
                     <a class="nav-link" href="/direitos_dos_animais"><h4 style="font-family: 'Roboto', sans-serif;">DIREITO DOS ANIMAIS</h4></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/conversas"><h4 style="font-family: 'Roboto', sans-serif;">CHAT</h4></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo e(route("sair")); ?>"><h4 style="font-family: 'Roboto', sans-serif;">SAIR</h4></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ">
+                        <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </a>
                 </li>
             </ul>
         </div>
     </nav>
 </header>
+<div class="collapse" id="collapseForm">
+    <div class="card card-body ">
+        <form class="form-inline" method="post" action="<?php echo e(route("filtro")); ?>">
+            <?php echo csrf_field(); ?>
+            <label for="raca"  class="mr-2">Raça</label>
+            <select id="raca" name="raca" class="form-control d-inline mr-2">
+                <option value="0">Qualquer raça</option>
+                <?php $__currentLoopData = $racas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $raca): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($raca->id); ?>"><?php echo e($raca->nome); ?></option>
 
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </select>
+            <label for="porte" class="mr-2">Porte</label>
+            <select name="porte" class="form-control mr-2" id="porte">
+                <option value="0">Qualquer porte</option>
+                <option value="pequeno">Pequeno</option>
+                <option value="medio">Médio</option>
+                <option value="grande">Grande</option>
+            </select>
+
+            <label for="sexo" class="mr-2">Sexo</label>
+            <select name="sexo" class="form-control mr-2" id="sexo">
+                <option value="0">Qualquer sexo</option>
+                <option value="femea">Femea</option>
+                <option value="macho">Macho</option>
+            </select>
+
+            <label for="cor"class="mr-2">Cor</label>
+            <select name="cor" class="form-control mr-2" id="cor">
+                <option value="0">Qualquer Cor</option>
+                <option value="preto">preto</option>
+                <option value="branco">branco</option>
+                <option value="dourado">dourado</option>
+                <option value="creme">creme</option>
+                <option value="amarelo">amarelo</option>
+                <option value="chocolate">chocolate</option>
+                <option value="mestico">mestiço</option>
+            </select>
+
+            <label for="pelagem"class="mr-2">Pelagem</label>
+            <select name="pelagem" class="form-control mr-2" id="pelagem">
+                <option value="0">Qualquer pelagem</option>
+                <option value="curto">curto</option>
+                <option value="medio">médio</option>
+                <option value="longo">longo</option>
+            </select>
+
+            <input type="submit" class="btn btn-block btn-outline-primary mt-2" value="Procurar">
+        </form>
+</div>
+</div>
     <?php echo $__env->yieldContent('content'); ?>
 
 

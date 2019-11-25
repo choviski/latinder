@@ -6,21 +6,27 @@
                 <p class="display-4 text-center">CONVERSAS</p>
                 <hr>
                 <!-- USUARIOS -->
-                <a href="/chatTeste" class="text-decoration-none">
-                <div class="mb-2 p-1" style="">
-                    <img class="rounded-circle" src="../../../../imgs_perfil/foto_perfil1.png" width="100px">
-                    <a  href="/chatTeste" class="ml-2 text-decoration-none text-dark" style="font-size: 20px"><b>Usuario 1</b> a respeito de <b>Jonas</b></a>
-                </div>
-                </a>
-                <hr>
-                <a  href="/chatTeste"  class="text-decoration-none">
-                <div class="mb-2 p-1" style="">
-                    <img class="rounded-circle" src="../../../../imgs_perfil/foto_perfil4.png" width="100px">
-                    <a   href="/chatTeste" class="ml-2 text-decoration-none text-dark" style="font-size: 20px"><b>Usuario 3</b> a respeito de <b>Cacatua</b></a>
-                </div>
-                <hr>
-                </a>
+                @foreach($conversas as $conversa)
+                    @if($conversa->usuario->id==$usuario->id)
 
+                        <a href="{{route("conversa",$conversa->id)}}" class="text-decoration-none">
+                            <div class="mb-2 p-1" style="">
+                                <img class="rounded-circle" src="{{url($conversa->usuario2->imagem)}}" width="100px">
+                                <a  href="{{route("conversa",$conversa->id)}}" class="ml-2 text-decoration-none text-dark" style="font-size: 20px"><b>{{$conversa->usuario2->nome}}</b> a respeito de <b>{{$conversa->publicacao->animal->nome}}</b></a>
+                            </div>
+                        </a>
+
+                    <hr>
+                    @elseif($conversa->usuario2->id==$usuario->id)
+                        <a href="{{route("conversa",$conversa->id)}}" class="text-decoration-none">
+                            <div class="mb-2 p-1" style="">
+                                <img class="rounded-circle" src="{{url($conversa->usuario->imagem)}}" width="100px">
+                                <a  href="{{route("conversa",$conversa->id)}}" class="ml-2 text-decoration-none text-dark" style="font-size: 20px"><b>{{$conversa->usuario->nome}}</b> a respeito de <b>{{$conversa->publicacao->animal->nome}}</b></a>
+                            </div>
+                        </a>
+                        <hr>
+                    @endif
+                @endforeach
         </div>
         </div>
     </div>

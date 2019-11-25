@@ -4,6 +4,7 @@
 
 <?php $__env->startSection('content'); ?><ul class="list-group">
     <ul class="list-group">
+        <a href="<?php echo e(route("entidades")); ?>"><button class="btn btn-outline-secondary col-1 mb-2">VOLTAR</button></a>
         <?php $__currentLoopData = $mensagens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mensagem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
             <li class="list-group-item align-items-center d-flex justify-content-between">ID #<?php echo e($mensagem->id); ?> |
@@ -29,7 +30,7 @@
     </ul>
     <form method="get" action="<?php echo e(route("mensagem.create")); ?>">
         <?php echo csrf_field(); ?>
-        <button class="btn btn btn-outline-primary mt-2 ">Adicionar</button>
+        <button class="btn btn btn-outline-primary mt-2 col-1">Adicionar</button>
     </form>
 <?php $__env->stopSection(); ?>
 

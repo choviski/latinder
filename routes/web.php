@@ -45,7 +45,10 @@ Route::post('/especie/{especie}',"EspecieController@raca")->middleware(CheckSess
 Route::get('/visitar/{id}',"PublicacaoController@visitar")->middleware(CheckSession::class)-> name("visitar/{id}");
 Route::get('/interessea',"PublicacaoController@interesse")->middleware(CheckSession::class)-> name("interessea");
 Route::post('/filtro',"FiltroController@filtrar")->middleware(CheckSession::class)-> name("filtro");
-
+Route::get('/conversas',"ChatController@listar")->middleware(CheckSession::class)-> name("conversas");
+Route::get('/batepapo/{publicacao}',"ChatController@conversa")->middleware(CheckSession::class)-> name("batepapo/{publicacao}");
+Route::get('/conversa/{id_conversa}',"ChatController@batepapo")->middleware(CheckSession::class)-> name("conversa");
+Route::post('/fala',"ChatController@mensagem")->middleware(CheckSession::class)-> name("fala");
 Route::get('/dashboard','DashboardController@getMonthlyAllData')->middleware(CheckSession::class,CheckAdm::class);
 
 
@@ -56,7 +59,6 @@ Route::get('/cadastro', function () {
     return view('cadastro')->middleware(CheckSession::class);
 });
 Route::get('/chatTeste','FiltroController@testeChat');
-Route::get('/chat','FiltroController@conversasChat');
 
 Route::get('/home','HomeController@home')->name("home")->middleware(CheckSession::class);
 Route::get('/perfil','HomeController@perfil')->name("perfil")->middleware(CheckSession::class);

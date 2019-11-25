@@ -162,11 +162,11 @@
                     </div>
                     <div class="mt-3 pb-2 ">
                         <i class="far fa-heart fa-2x border border-primary rounded-circle p-2" id="like{{$publicacao->id}}" onclick="like({{$publicacao->id}})"></i>
-
+                        <a href="batepapo/{{$publicacao->id}}"><i class="far fa-comments fa-2x border border-primary rounded-circle p-2" id="chat" ></i></a>
                        @foreach($interesses as $interesse)
                                 @if($interesse->id_publicacao == $publicacao->id && $usuario->id == $interesse->id_usuario)
                                 <i class="fas fa-heart fa-2x border border-primary rounded-circle p-2" id="like{{$interesse->id}}" onclick="deslike({{$interesse->id}})"></i>
-                                    <script>
+                                <script>
                                         $("#like{{$publicacao->id}}").remove();
                                     </script>
                                 @endif
@@ -289,7 +289,6 @@
             },
         }).done(
             function () {
-                console.log($("#comentarioN{{$comentario->id}}").remove());
                 $("#comentarioN"+id).remove();
             }
         ).fail(

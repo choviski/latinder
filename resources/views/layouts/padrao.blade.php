@@ -67,7 +67,7 @@
                     <a class="nav-link" href="/direitos_dos_animais"><h4 style="font-family: 'Roboto', sans-serif;">DIREITO DOS ANIMAIS</h4></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/chat"><h4 style="font-family: 'Roboto', sans-serif;">CHAT</h4></a>
+                    <a class="nav-link" href="/conversas"><h4 style="font-family: 'Roboto', sans-serif;">CHAT</h4></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route("sair")}}"><h4 style="font-family: 'Roboto', sans-serif;">SAIR</h4></a>
@@ -92,9 +92,9 @@
                 <option value="0">Qualquer raça</option>
                 @foreach ($racas as $raca)
                     <option value="{{$raca->id}}">{{$raca->nome}}</option>
-            </select>
-            @endforeach
 
+            @endforeach
+            </select>
             <label for="porte" class="mr-2">Porte</label>
             <select name="porte" class="form-control mr-2" id="porte">
                 <option value="0">Qualquer porte</option>

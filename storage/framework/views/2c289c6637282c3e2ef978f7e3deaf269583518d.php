@@ -118,7 +118,14 @@
                     <a  href="visitar/<?php echo e($publicacao->usuario->id); ?>"> <img class="rounded-circle border text" src="<?php echo e($publicacao->usuario->imagem); ?>" width="80px"></a>
                     <a class="ml-3 mt-5" style="font-family: 'Roboto', sans-serif; font-size:30px " href="visitar/<?php echo e($publicacao->usuario->id); ?>"><?php echo e($publicacao->usuario->nome); ?></a>
                     <div class="border p-0 mt-1 mb-1" style="border-radius: 50px">
-                    <p class="display-4 text-center"><?php echo e($publicacao->animal->nome); ?></p>
+                    <p class="display-4 text-center">
+                        <?php if($publicacao->animal->nome==""): ?>
+                            Sem nome
+                        <?php else: ?>
+                            <?php echo e($publicacao->animal->nome); ?>
+
+                        <?php endif; ?>
+                    </p>
                     </div>
                     <p class="text-right"> <i class="fas fa-clock mb-1 mr-1"></i> <?php echo e($publicacao->tempo); ?></p>
                     <?php if($usuario->id == $publicacao->usuario->id): ?>
@@ -155,11 +162,11 @@
                     </div>
                     <div class="mt-3 pb-2 ">
                         <i class="far fa-heart fa-2x border border-primary rounded-circle p-2" id="like<?php echo e($publicacao->id); ?>" onclick="like(<?php echo e($publicacao->id); ?>)"></i>
-
+                        <a href="batepapo/<?php echo e($publicacao->id); ?>"><i class="far fa-comments fa-2x border border-primary rounded-circle p-2" id="chat" ></i></a>
                        <?php $__currentLoopData = $interesses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $interesse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($interesse->id_publicacao == $publicacao->id && $usuario->id == $interesse->id_usuario): ?>
                                 <i class="fas fa-heart fa-2x border border-primary rounded-circle p-2" id="like<?php echo e($interesse->id); ?>" onclick="deslike(<?php echo e($interesse->id); ?>)"></i>
-                                    <script>
+                                <script>
                                         $("#like<?php echo e($publicacao->id); ?>").remove();
                                     </script>
                                 <?php endif; ?>
@@ -173,10 +180,17 @@
 
                             <?php $__currentLoopData = $comentarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comentario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($comentario->id_publicacao == $publicacao->id): ?>
-                                    <div class="row">
-                                        <div class="col-12 border p-1  mt-1" style="border-radius: 50px">
+                                    <div class="row" id="comentarioN<?php echo e($comentario->id); ?>">
+                                        <div class="col-12 border p-2  mt-1" style="border-radius: 20px;">
+                                            <?php if($usuario->id == $comentario->id_usuario || $publicacao->id_usuario == $usuario->id): ?>
+                                            <div class="float-right">
+
+                                                    <button class="btn text-danger" onclick="descomentar(<?php echo e($comentario->id); ?>)">x</button>
+
+                                            </div>
+                                            <?php endif; ?>
                                             <img src="<?php echo e($comentario->usuario->imagem); ?>" width="50px" class="rounded-circle ">
-                                            <a class=""><b><?php echo e($comentario->usuario->nome); ?></b>: <?php echo e($comentario->conteudo); ?></a>
+                                            <p class="col-12 text-break d-inline p-2"><b><?php echo e($comentario->usuario->nome); ?></b>: <?php echo e($comentario->conteudo); ?></p>
                                         </div>
                                     </div>
                                 <?php endif; ?>
@@ -233,7 +247,6 @@
             },
         }).done(
             function (data) {
-                console.log(data);
                 document.getElementById("like"+id).classList.remove("fas");
                 document.getElementById("like"+id).classList.add("far");
                 document.getElementById("like"+id).setAttribute('onClick'," like("+(data['novoInteresse'])+")");
@@ -248,7 +261,6 @@
             }
         );
     }
-
     function comentar(id){
         var publicacao = $('#id'+id).val();
         var conteudo = $('#conteudo'+id).val();
@@ -257,7 +269,7 @@
             url:'/comentar/'+publicacao+'/'+conteudo,
         }).done(
             function (data) {
-                $("#divComentarios"+id).append(" <div class=\"row\"><div class=\"col-12 border p-1  mt-1\" style=\"border-radius: 50px\"><img src=\"<?php echo e($usuario->imagem); ?>\" width=\"50px\" class=\"rounded-circle\"><a class='ml-1'><b><?php echo e($usuario->nome); ?></b>: "+conteudo+" </div></div>");
+                $("#divComentarios"+id).append(" <div class=\"row\"><div class=\"col-12 border p-2  mt-1\" style=\"border-radius: 20px\">  <img src=\"<?php echo e($usuario->imagem); ?>\" width=\"50px\" class=\"rounded-circle\"><p class='col-12 text-break d-inline p-2'><b><?php echo e($usuario->nome); ?></b>: "+conteudo+"</p> </div></div>");
                 $('#conteudo'+id).val("");
 
             }
@@ -267,6 +279,25 @@
             }
         );
     }
+    function descomentar(id){
+
+        $.ajax({
+            url:'/comentario/removerComAjax/'+id,
+            method:'DELETE',
+            data: {
+                "_token": "<?php echo e(csrf_token()); ?>",
+            },
+        }).done(
+            function () {
+                $("#comentarioN"+id).remove();
+            }
+        ).fail(
+            function () {
+                alert("erro");
+            }
+        );
+    }
+
 </script>
     </div>
     <div id="snackbar">Animal adicionado aos interesses com sucesso</div>

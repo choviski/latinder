@@ -95,8 +95,9 @@ class PublicacaoController extends Controller
     public function interesse(){
         $usuario=session()->get("Usuario");
         $amigo=session()->get("amigo");
+        $racas= Racas::all();
         $interesse=Interesse::where('id_usuario','=',$amigo->id)->get();
-        return view("perfilinteresses")->with(["amigo"=>$amigo,"interesses"=>$interesse,"usuario"=>$usuario]);
+        return view("perfilinteresses")->with(["amigo"=>$amigo,"interesses"=>$interesse,"usuario"=>$usuario, "racas" =>$racas]);
 
     }
 }

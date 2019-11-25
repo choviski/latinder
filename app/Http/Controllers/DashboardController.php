@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Animal;
+use App\Publicacao;
 use App\Usuario;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -50,6 +52,26 @@ class DashboardController extends Controller
         $monthly_animal_count = Animal::whereMonth('created_at', $mes)->get()->count();
         return $monthly_animal_count;
     }
+    function getAllPublicacaoMonths(){
+        $publicacao_meses_array = array();
+        $datas_publicacao = Publicacao::orderBy('created_at', 'ASC')->pluck('created_at');
+        $datas_publicacao = json_decode($datas_publicacao);
+        if (!empty($datas_publicacao)) {
+            foreach ($datas_publicacao as $unf_datas) {
+                $datas = new DateTime($unf_datas);
+                $mes_numero = $datas->format('m');
+                $mes_nome = $datas->format('M');
+                $usuario_publicacao_array[$mes_numero] = $mes_nome;
+            }
+            return ($usuario_publicacao_array);
+        }
+    }
+
+    function getMonthlyPublicacaoCount($mes)
+    {
+        $monthly_publicacao_count = Publicacao::whereMonth('created_at', $mes)->get()->count();
+        return $monthly_publicacao_count;
+    }
 
 
     function getMonthlyAllData()
@@ -67,6 +89,19 @@ class DashboardController extends Controller
             }
         }
 
+        //PEGANDO DADOS DAS PUBLICAÇÕES
+
+        $monthly_publicacao_count_array = array();
+        $publicacao_meses_array = $this->getAllPublicacaoMonths();
+        $meses_publicacao_array = array();
+        if (!empty($publicacao_meses_array)) {
+            foreach ($publicacao_meses_array as $mes_numero => $mes_nome) {
+                $monthly_publicacao_count = $this->getMonthlyPublicacaoCount($mes_numero);
+                array_push($monthly_publicacao_count_array, $monthly_publicacao_count);
+                array_push($meses_publicacao_array, $mes_nome);
+            }
+        }
+
         //PEGANDO DADOS DOS ANIMAIS
 
         $monthly_animal_count_array = array();
@@ -79,7 +114,6 @@ class DashboardController extends Controller
                 array_push($meses_nome_animal_array, $mes_nome);
             }
         }
-
         $monthly_data_array = array(
             'animais_vacinados' => Animal::where('vacinacao','=','sim')->get()->count(),
             'animais_nao_vacinados' => Animal::where('vacinacao','=','nao')->get()->count(),
@@ -96,12 +130,25 @@ class DashboardController extends Controller
             'animais_amarelo' => Animal::where('cor','=','amarelo')->get()->count(),
             'animais_chocolate' => Animal::where('cor','=','chocolate')->get()->count(),
             'animais_mestico' => Animal::where('cor','=','mestico')->get()->count(),
+            /*----------------------*/
+            'animais_pelo_curto' => Animal::where('pelagem','=','curto')->get()->count(),
+            'animais_pelo_medio' => Animal::where('pelagem','=','medio')->get()->count(),
+            'animais_pelo_longo' => Animal::where('pelagem','=','longo')->get()->count(),
+            'animais_pequenos' => Animal::where('porte','=','pequeno')->get()->count(),
+            'animais_medios' => Animal::where('porte','=','medio')->get()->count(),
+            'animais_grandes' => Animal::where('porte','=','grande')->get()->count(),
+            'animais_cachorro' =>DB::table('animals')->join('raca','animals.id_raca','=','raca.id')->join('especies','raca.id_especie','=','especies.id')->where('especies.id','=',1)->get()->count(),
+            'animais_gato'=>DB::table('animals')->join('raca','animals.id_raca','=','raca.id')->join('especies','raca.id_especie','=','especies.id')->where('especies.id','=',2)->get()->count(),
+            /*----------------------*/
             'meses_usuarios' => $meses_nome__usuario_array,
+            'meses_publicacao' => $meses_publicacao_array,
             'meses_animal' => $meses_nome_animal_array,
             'usuarios' => $monthly_user_count_array,
+            'publicacao' => $monthly_publicacao_count_array,
             'animais' => $monthly_animal_count_array,
             'total_usuarios' => Usuario::count(),
             'total_animais' => Animal::count(),
+            'total_publicacao' => Publicacao::count(),
 
         );
         return view('/dashboard')->with(['dados' => $monthly_data_array]);

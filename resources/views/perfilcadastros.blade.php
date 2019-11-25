@@ -15,7 +15,7 @@
             <a  href="#"> <img src="{{$amigo->imagem}}" class="rounded-circle border" width="80px"></a>
             <p class="font-weight-bold">{{$amigo->nome}}</p>
         </div>
-        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border-right border p-2"><a href="visitar/{{$amigo->id}}"><h5 class="mt-4 mt-md-3 text-muted"><u>CADASTROS</u></h5></a></div>
+        <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border-right border p-2"><a href="#"><h5 class="mt-4 mt-md-3 text-muted"><u>CADASTROS</u></h5></a></div>
         <div class="col-4 col-md-5 text-center bg-light border-top border-bottom border p-2"><a href="{{route("interessea")}}"><h5 class="mt-4 mt-md-3 text-muted ">INTERESSES</h5></a></div>
     </div>
     <!-- ============ AQUI VÃO AS POSTAGENS ============ -->

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class EspecieController extends Controller
 {
-    public function especie($especie){
+    public function raca($especie){
         $raca=Racas::select('nome','id')->where('id_especie','=',$especie)->get();
         return Response()->json([
             'raca' => $raca,
