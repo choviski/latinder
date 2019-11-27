@@ -27,6 +27,7 @@ class AnimalController extends Controller
      */
     public function create(Request $request)
     {
+        $usuario = $request->session()->get("usuario");
         $raca=Racas::where('id_especie','=',1);
         $animais = Animal::all();
         $usuario=$request->session()->get("Usuario");
@@ -53,8 +54,9 @@ class AnimalController extends Controller
         }else{
             $enderec=0;
         }
+
         $cidades=Cidade::all();
-        return view("animal.create")->with(["enderecos"=>$enderec,"racas"=>$raca,"cidades"=>$cidades]);
+        return view("animal.create")->with(["enderecos"=>$enderec,"racas"=>$raca,"cidades"=>$cidades,'usuario'=>$usuario]);
     }
 
     /**

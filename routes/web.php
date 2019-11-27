@@ -25,7 +25,7 @@ Route::resource("/publicacao","PublicacaoController",['except'=>'destroy'])->mid
 Route::delete('/publicacao/remover/{id}', "PublicacaoController@destroy")->middleware(CheckSession::class);
 Route::resource("/comentario","ComentarioController",['except'=>'destroy'])->middleware(CheckSession::class,CheckAdm::class);
 Route::delete('/comentario/remover/{id}', "ComentarioController@destroy")->middleware(CheckSession::class,CheckAdm::class);
-Route::delete('/comentario/removerComAjax/{id}', "ComentarioController@deletarComentarioComAjax")->middleware(CheckSession::class,CheckAdm::class);
+Route::delete('/comentario/removerComAjax/{id}', "ComentarioController@deletarComentarioComAjax")->middleware(CheckSession::class);
 Route::get('/timeLine',"TimeLineController@timeLine")->middleware(CheckSession::class)->name("timeLine");
 Route::get('interesses/{id}',"InteresseController@store")->middleware(CheckSession::class)->name("interesses/{id}");;
 Route::get('/listar',"InteresseController@listar")->middleware(CheckSession::class)->name("listar");;
@@ -49,6 +49,8 @@ Route::get('/conversas',"ChatController@listar")->middleware(CheckSession::class
 Route::get('/batepapo/{publicacao}',"ChatController@conversa")->middleware(CheckSession::class)-> name("batepapo/{publicacao}");
 Route::get('/conversa/{id_conversa}',"ChatController@batepapo")->middleware(CheckSession::class)-> name("conversa");
 Route::post('/fala',"ChatController@mensagem")->middleware(CheckSession::class)-> name("fala");
+Route::post('/mensagemAjax',"ChatController@mensagemAjax")->middleware(CheckSession::class)-> name("falaAjax");
+Route::post('/mensagensNovas',"ChatController@novaMensagem")->middleware(CheckSession::class)-> name("novasMensagens");
 Route::get('/dashboard','DashboardController@getMonthlyAllData')->middleware(CheckSession::class,CheckAdm::class);
 
 

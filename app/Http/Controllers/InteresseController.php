@@ -67,6 +67,7 @@ class InteresseController extends Controller
     }
     public function destroyAjax (Request $request)
     {
+
         $id = $request->id;
         $novoInteresse = Interesse::find($id);
         Interesse::destroy($request->id);

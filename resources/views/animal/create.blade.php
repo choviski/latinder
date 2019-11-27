@@ -1,15 +1,18 @@
-@extends('../layouts/cruds')
+@extends('/layouts/padrao')
 
-@section('header')
-    <h1 class="display-4">CADASTRO DE ANIMAL</h1>
-@endsection
+
+
+
 
 @section('content')
+    <div class="row d-flex justify-content-center">
+    <div class="col-md-8 col-sm-12">
 
 
     <form action="{{Route('animar')}}" method="post" enctype="multipart/form-data">
         @csrf
-        <div class="form-group bg-light p-2 rounded">
+        <div class="form-group bg-light p-2 rounded mt-md-2 mt-sm-0">
+            <h1 class="display-4">CADASTRO DE ANIMAL</h1>
             <label for="nome">Nome:</label>
             <input type="text" class="form-control" id="nome" placeholder="insira o nome do animal" name="nome">
 
@@ -166,6 +169,8 @@
         </div>
 
     </form>
+    </div>
+    </div>
     <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
