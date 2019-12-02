@@ -12,7 +12,7 @@
                         <a href="{{route("conversa",$conversa->id)}}" class="text-decoration-none">
                             <div class="mb-2 p-1" style="">
                                 <img class="rounded-circle" src="{{url($conversa->usuario2->imagem)}}" width="100px">
-                                <a  href="{{route("conversa",$conversa->id)}}" class="ml-2 text-decoration-none text-dark" style="font-size: 20px"><b>{{$conversa->usuario2->nome}}</b> a respeito de <b>{{$conversa->publicacao->animal->nome}}</b></a>
+                                <a  href="{{route("conversa",$conversa->id)}}" class="ml-2 text-decoration-none text-dark" style="font-size: 20px"><b>{{$conversa->usuario2->nome}}</b> </a>
                             </div>
                         </a>
 
@@ -21,7 +21,7 @@
                         <a href="{{route("conversa",$conversa->id)}}" class="text-decoration-none">
                             <div class="mb-2 p-1" style="">
                                 <img class="rounded-circle" src="{{url($conversa->usuario->imagem)}}" width="100px">
-                                <a  href="{{route("conversa",$conversa->id)}}" class="ml-2 text-decoration-none text-dark" style="font-size: 20px"><b>{{$conversa->usuario->nome}}</b> a respeito de <b>{{$conversa->publicacao->animal->nome}}</b></a>
+                                <a  href="{{route("conversa",$conversa->id)}}" class="ml-2 text-decoration-none text-dark" style="font-size: 20px"><b>{{$conversa->usuario->nome}}</b> </a>
                             </div>
                         </a>
                         <hr>

@@ -52,7 +52,8 @@ Route::post('/fala',"ChatController@mensagem")->middleware(CheckSession::class)-
 Route::post('/mensagemAjax',"ChatController@mensagemAjax")->middleware(CheckSession::class)-> name("falaAjax");
 Route::post('/mensagensNovas',"ChatController@novaMensagem")->middleware(CheckSession::class)-> name("novasMensagens");
 Route::get('/dashboard','DashboardController@getMonthlyAllData')->middleware(CheckSession::class,CheckAdm::class);
-
+Route::get('esqueceu',"UsuarioController@esqueceu")->name("esquecer");
+Route::post('recuperar',"UsuarioController@recuperar")->name("recuperar");
 
 Route::get('/', "LoginController@index")->name("inicio");
 Route::get('/sair', "LoginController@sair")->name("sair");
@@ -61,7 +62,9 @@ Route::get('/cadastro', function () {
     return view('cadastro')->middleware(CheckSession::class);
 });
 Route::get('/chatTeste','FiltroController@testeChat');
-
+Route::get('/erro', function(){
+    return view('erros.conexao');
+});
 Route::get('/home','HomeController@home')->name("home")->middleware(CheckSession::class);
 Route::get('/perfil','HomeController@perfil')->name("perfil")->middleware(CheckSession::class);
 Route::get('/perfilInt','HomeController@perfilInteresses')->name("perfilInteresses")->middleware(CheckSession::class);

@@ -20,7 +20,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view("usuario.create");
+        $erro=session()->get("erro");
+        $erro2=session()->get("erro2");
+        return view("usuario.create")->with(["erro"=>$erro,"erro2"=>$erro2]);
     }
 
     /**
@@ -31,6 +33,19 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        $usuarios=Usuario::all();
+        foreach ($usuarios as $usuario){
+           $request->session()->flash("erro","Já ha um usuário cadastrado com esse e-mail, por favor tente usar outro e-mail");
+            if($usuario->email==$request->email){
+                return redirect()->back();
+            }
+        }
+        foreach ($usuarios as $usuario){
+            $request->session()->flash("erro2","Já ha um usuário cadastrado com esse login, por favor tente usar outro login");
+            if($usuario->login==$request->login){
+                return redirect()->back();
+            }
+        }
       Usuario:: create($request->all());
         $request->session()->flash("criado","Usuario cadastrado com sucesso!");
         return redirect()->route("inicio");
@@ -72,13 +87,13 @@ class UsuarioController extends Controller
         Usuario::find($id)->update($request->all());
         return redirect()->Route("usuario.index");
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+public function esqueceu(){
+        return view ("esqueceu");
+}
+public function recuperar(Request $request){
+        $usuario=Usuario::where("login",'=',$request->login)->first();
+        return view("recuperar")->with(["usuario"=>$usuario]);
+}
     public function destroy(Request $request)
     {
         Usuario::destroy($request->id);

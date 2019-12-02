@@ -71,7 +71,7 @@
                class="border mt-2" src="../../../{{$animal->imagem}}"width="150px"><br>
 
             <label  for="descricao">Descrição:</label>
-            <textarea class="form-control" id="descricao" rows="3" name="descricao" >{{$animal->descricao}}</textarea>
+            <textarea class="form-control" id="descricao" rows="3" name="descricao" required>{{$animal->descricao}}</textarea>
 
 
             <label  for="raca">Raça:</label>

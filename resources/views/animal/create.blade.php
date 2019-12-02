@@ -80,12 +80,16 @@
 
             <label for="raca">Raça:</label>
             <select class="form-control" id="raca" name="id_raca" required>
-                <option>Selecione a raça</option>
+                <option value="494">Selecione a raça</option>
                 @foreach($racas as $raca)
                     <option value="{{$raca->id}}">{{$raca->nome}}</option>
                 @endforeach
             </select>
-
+            @if(!empty($sem_endereco))
+                <div class="alert alert-success mt-2">
+                    {{$sem_endereco}}
+                </div>
+            @endif
             <label for="endereco">Endereco:</label>
             <select name="id_endereco" class="form-control" id="endereco">
                 <option value="1">ESCOLHA UM ENDEREÇO</option>
@@ -227,7 +231,6 @@
                     var c = document.getElementById("raca");
                     c.disabled = false;
                     for (var i=0; i < raca.length; i++) {
-                        console.log(raca[i]);
                         $("#raca").append($('<option>', {
                             value: raca[i]['id'],
                             text: raca[i]['nome']
