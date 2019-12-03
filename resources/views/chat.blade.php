@@ -40,12 +40,9 @@
                         <input type="hidden" value="{{$destinatario->id}}" name="destinatario" id="destinatario">
                         <input type="hidden" value="{{$remetente->id}}" name="remetente" id="remetente">
                         <input type="hidden" value="{{$publicacao->id}}" name="publicacao" id="publicacao">
-                        <input type="hidden" value="@if($ultima_mensagem=="") 0 @else {{$ultima_mensagem->id}} @endif" name="ultima mensagem" id="id_ultima_mensagem">
-<<<<<<< HEAD
+                        <input type="hidden" value="@if($ultima_mensagem=="")0 @else{{$ultima_mensagem->id}}@endif" name="ultima mensagem" id="id_ultima_mensagem">
                         <input type="submit" class="btn btn-outline-primary btn-block mt-2" id="btn">
-=======
-                    <input type="submit" class="btn btn-outline-primary btn-block mt-2" id="btn">
->>>>>>> 38d3498c7a2263a98f4e25f8222cab3c522ff702
+
 
 
 
@@ -79,6 +76,7 @@
                     $("#divMensagem").append("<div class=\"col-12\" style=\"min-height: 80px\"><div class=\" mt-2 float-right text-right\"><div class=\"text-break \"><a class=\" p-1 rounded\" style=\"background-color: #63b9ff \">"+((data["created_at"]))+"</a></div><div class=\"text-break \"><a class=\" p-1 rounded\" style=\"background-color: #63b9ff\">"+((data["conteudo"]))+"</a></div></div></div>");
                     $('#mensagem').val("");
 
+
                 }
             });
             });
@@ -96,7 +94,8 @@
                   url:"{{route("novasMensagens")}}",
                   data:{"id_remetente": id_remetente,"id_destinatario": id_destinatario,"publicacao":publicacao,"id_ultima_mensagem":id_ultima_mensagem, "_token": "{{ csrf_token() }}"},
                   success:function (data) {
-                           $("#id_ultima_mensagem").val((data["id_ultima_mensagem"]["id"]))
+                      $("#id_ultima_mensagem").val((data["id_ultima_mensagem"]["id"]))
+
                       @isset($mensagem)
                           if(!((data["mensagensnovas"]))){
 

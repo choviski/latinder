@@ -36,9 +36,14 @@
 
 
 
+
     </style>
 </head>
-<body>
+<body >
+<div style="width: 100%;height: 100%;background-color: rgba(255,255,255,0.8);position: fixed;display: none; z-index: 10000;background-repeat: no-repeat; background-size: cover" class="p-2" id="divFullscreen" >
+    <button id="exitFullscreen" class="btn btn-outline-primary mt-3" style="position: absolute;z-index: 20000" ><i class="fas fa-times fa-2x"></i></button>
+    <img id="imagemFullscreen" src="" class="rounded bg-shadow" height="100%" width="auto">
+</div>
 <header class="sticky-top container p-0 col-12">
     <nav class="col-12 navbar navbar-expand-lg navbar-light bg-white text-bg " id="myHeader" style="height: 150px; width: 100%;">
         <a class="navbar-brand" href="#">

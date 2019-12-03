@@ -8,7 +8,40 @@
             padding: 2px 3px;
             border-color:  #0083ff;
             color: black;
+        .nomeUser{
+            font-size: 2vw;
         }
+        .nomeAnimal{
+            font-size: 3vw;
+        }
+        @media screen and (min-width: 300px){
+            .nomeUser{
+                font-size: 4vw;
+            }
+            .nomeAnimal{
+                font-size: 6vw;
+            }
+
+        }
+        @media screen and (min-width: 760px){
+            .nomeUser{
+                font-size: 2vw;
+            }
+            .nomeAnimal{
+                font-size: 2vw;
+            }
+
+        }
+        @media screen and (min-width: 922px){
+            .nomeUser{
+                font-size: 2vw;
+            }
+            .nomeAnimal{
+                font-size: 3vw;
+            }
+
+        }
+
     </style>
     <div class="row">
         <div class="col-4 col-md-2 text-center bg-light border-top border-bottom border-right p-2   ">
@@ -30,11 +63,11 @@
                                                                              src="{{$publicacao->usuario->imagem}}"
                                                                              width="80px"></a>
                         <div class="col-lg-6 col-sm-4 col-md-6 col-4 d-inline-block mt-2">
-                            <a class="ml-3 mt-5" style="font-family: 'Roboto', sans-serif; font-size:2vw;word-break: break-word "
+                            <a class="ml-3 mt-5 nomeUser" style="font-family: 'Roboto', sans-serif; word-break: break-word "
                                href="visitar/{{$publicacao->usuario->id}}">{{$publicacao->usuario->nome}}</a>
                         </div>
                         <div class="d-inline-block  mt-2" style="margin-bottom: 0px">
-                            <p class="text-center ml-2" style="font-size: 3vw">
+                            <p class="text-center ml-2 nomeAnimal">
                                 @if($publicacao->animal->nome=="")
                                     Sem nome
                                 @else
@@ -78,7 +111,7 @@
 
                     </div>
                     <p class="mt-1"><b>Descrição: </b>{{$publicacao->animal->descricao}}</p>
-                    <div class="mt-3 pb-2">
+                    <div class="mt-3 pb-2 mb-4">
                         <a><i class="fas fa-map-marker-alt"></i> {{$publicacao->animal->endereco->rua}}, {{$publicacao->animal->endereco->complemento}} | {{$publicacao->animal->endereco->cidade->nome}} - {{$publicacao->animal->endereco->cidade->estado}}</a>
                     </div>
                 </div>
