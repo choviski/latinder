@@ -40,7 +40,7 @@
                         <input type="hidden" value="{{$destinatario->id}}" name="destinatario" id="destinatario">
                         <input type="hidden" value="{{$remetente->id}}" name="remetente" id="remetente">
                         <input type="hidden" value="{{$publicacao->id}}" name="publicacao" id="publicacao">
-                        <input type="hidden" value="@if($ultima_mensagem=="")0 @else{{$ultima_mensagem->id}}@endif" name="ultima mensagem" id="id_ultima_mensagem">
+                        <input type="hidden" value="@if($ultima_mensagem=="")-1 @else{{$ultima_mensagem->id}}@endif" name="ultima mensagem" id="id_ultima_mensagem">
                         <input type="submit" class="btn btn-outline-primary btn-block mt-2" id="btn">
 
 
