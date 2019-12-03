@@ -1,13 +1,12 @@
-<?php $__env->startSection('header'); ?>
-    <h1 class="display-4">CADASTRO DE ANIMAL</h1>
-<?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('content'); ?>
+    <div class="row d-flex justify-content-center">
+    <div class="col-md-8 col-sm-12">
 
 
     <form action="<?php echo e(Route('animar')); ?>" method="post" enctype="multipart/form-data">
         <?php echo csrf_field(); ?>
-        <div class="form-group bg-light p-2 rounded">
+        <div class="form-group bg-light p-2 rounded mt-md-2 mt-sm-0">
+            <h1 class="display-4">CADASTRO DE ANIMAL</h1>
             <label for="nome">Nome:</label>
             <input type="text" class="form-control" id="nome" placeholder="insira o nome do animal" name="nome">
 
@@ -75,12 +74,17 @@
 
             <label for="raca">Raça:</label>
             <select class="form-control" id="raca" name="id_raca" required>
-                <option>Selecione a raça</option>
+                <option value="494">Selecione a raça</option>
                 <?php $__currentLoopData = $racas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $raca): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <option value="<?php echo e($raca->id); ?>"><?php echo e($raca->nome); ?></option>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </select>
+            <?php if(!empty($sem_endereco)): ?>
+                <div class="alert alert-success mt-2">
+                    <?php echo e($sem_endereco); ?>
 
+                </div>
+            <?php endif; ?>
             <label for="endereco">Endereco:</label>
             <select name="id_endereco" class="form-control" id="endereco">
                 <option value="1">ESCOLHA UM ENDEREÇO</option>
@@ -164,6 +168,8 @@
         </div>
 
     </form>
+    </div>
+    </div>
     <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -220,7 +226,6 @@
                     var c = document.getElementById("raca");
                     c.disabled = false;
                     for (var i=0; i < raca.length; i++) {
-                        console.log(raca[i]);
                         $("#raca").append($('<option>', {
                             value: raca[i]['id'],
                             text: raca[i]['nome']
@@ -238,4 +243,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('../layouts/cruds', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\pogramas\latinder\resources\views/animal/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('/layouts/padrao', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\pogramas\latinder\resources\views/animal/create.blade.php ENDPATH**/ ?>

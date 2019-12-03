@@ -22,4 +22,6 @@ class Conversa extends Model
     public function usuario2(){
         return $this->belongsTo("App\Usuario",'id_usuario2','id');
     }
+    use SoftDeletes;
+
 }

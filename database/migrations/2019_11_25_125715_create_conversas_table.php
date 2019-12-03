@@ -22,6 +22,7 @@ class CreateConversasTable extends Migration
             $table->unsignedBigInteger("id_usuario2");
             $table->foreign("id_usuario2")->references("id")->on("usuarios");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

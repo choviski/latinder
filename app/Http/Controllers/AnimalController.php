@@ -54,9 +54,9 @@ class AnimalController extends Controller
         }else{
             $enderec=0;
         }
-
+        $sem_endereco=session()->get("sem_endereco");
         $cidades=Cidade::all();
-        return view("animal.create")->with(["enderecos"=>$enderec,"racas"=>$raca,"cidades"=>$cidades,'usuario'=>$usuario]);
+        return view("animal.create")->with(["enderecos"=>$enderec,"racas"=>$raca,"cidades"=>$cidades,'usuario'=>$usuario,"sem_endereco"=>$sem_endereco]);
     }
 
     /**
@@ -84,15 +84,20 @@ class AnimalController extends Controller
 
 public function criar(Request $request){
     $animal = Animal::create($request->except(['rua,bairro,id_cidade,compl,cep,id_endereco']));
-    if($request->rua){
-        $endereco= new Endereco();
-        $endereco->rua=$request->rua;
-        $endereco->cep=$request->cep;
-        $endereco->bairro=$request->bairro;
-        $endereco->complemento=$request->complemento;
-        $endereco->id_cidade=$request->id_cidade;
-        $endereco->save();
-        $animal->id_endereco=$endereco->id;
+    if($request->rua&&$request->id_cidade&&$request->bairro&&$request->cep&&$request->complemento){
+        try {
+            $endereco = new Endereco();
+            $endereco->rua = $request->rua;
+            $endereco->cep = $request->cep;
+            $endereco->bairro = $request->bairro;
+            $endereco->complemento = $request->complemento;
+            $endereco->id_cidade = $request->id_cidade;
+            $endereco->save();
+            $animal->id_endereco = $endereco->id;
+        }catch (Exception $e){
+            session()->put("sem_endereco","Preencha todos os dados do seu endereço corretamente");
+            return redirect()->back();
+        }
     }else{
         $animal->id_endereco=$request->id_endereco;
     }

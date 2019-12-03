@@ -57,11 +57,19 @@ class ChatController extends Controller
             ->where('id_remetente','=',$publicacaos->usuario->id)
             ->orWhere('id_destinatario','=',$publicacaos->usuario->id)
             ->orderBy("created_at")->get();
-        $conversa = Conversa::where('id_publicacao','=',$publicacaos->id)->where('id_usuario','=',$usuario->id)
-            ->orWhere('id_usuario2','=',$usuario->id)
-            ->where('id_usuario','=',$publicacaos->usuario->id)
-            ->orWhere('id_usuario2','=',$publicacaos->usuario->id)->first();
-
+        $conversas=Conversa::whereRaw("(`id_usuario` = {$usuario->id} or `id_usuario2` = {$usuario->id}) and (`id_usuario` = {$destinatario->id} or `id_usuario2` = {$destinatario->id})")->get();
+        if (!$conversas->count()) {
+            $conversa = new Conversa();
+            $conversa->id_usuario = $usuario->id;
+            $conversa->id_usuario2 = $destinatario->id;
+            $conversa->id_publicacao = $publicacao;
+            $conversa->save();
+        } else {
+            $conversa = Conversa::where('id_publicacao', '=', $publicacaos->id)->where('id_usuario', '=', $usuario->id)
+                ->orWhere('id_usuario2', '=', $usuario->id)
+                ->where('id_usuario', '=', $publicacaos->usuario->id)
+                ->orWhere('id_usuario2', '=', $publicacaos->usuario->id)->first();
+        }
         if(Mensagem::where('id_conversa','=',$conversa->id)->where('id_destinatario','=',$usuario->id)->orderBy("id","desc")->first()){
             $id_um = Mensagem::where('id_conversa','=',$conversa->id)->where('id_destinatario','=',$usuario->id)->orderBy("id","desc")->first();
         }else {

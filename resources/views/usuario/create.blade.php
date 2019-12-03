@@ -8,10 +8,30 @@
     <div class=" p-2 bg-light rounded shadow text-center">
         <form action="{{route("storeUsuario")}}" method="post" class="form-group ">
             @csrf
+            @if(!empty($erro))
+                <div class="alert alert-danger mt-2">
+                    {{$erro}}
+                </div>
+            @endif
+            @if(!empty($erro2))
+                <div class="alert alert-danger mt-2">
+                    {{$erro2}}
+                </div>
+            @endif
+
             <input type="text" name="nome" class="form-control mt-2" placeholder="Nome" required>
             <input type="text" name="login" class="form-control mt-2" placeholder="Login" required>
             <input type="email" name="email" class="form-control mt-2" placeholder="E-mail" required>
             <input type="password" name="senha" class="form-control mt-2" placeholder="Senha" required>
+            <label class="form-control mt-2">Escolha sua Pergunta secreta</label>
+            <select class="form-control" required>
+                <option value="1">Qual a sua comida favorita?</option>
+                <option VALUE="2">Qual o nome de solteira da sua mãe?</option>
+                <option VALUE="3">Qual o nome do seu primeiro animal de estimação?</option>
+                <option VALUE="4">Qual o nome do seu amigo de infância?</option>
+                <option VALUE="5">Qual o nome da cidade que você nasceu?</option>
+            </select>
+            <input type="text" name="resposta" class="form-control mt-2" placeholder="Resposta..." required>
             <p class="text-center mt-1 font-weight-bold">Escolha uma foto de perfil:</p>
             <a onclick="imagem1()" class="col-md-5 col-sm-12 mt-1  btn btn-light rounded">
                 <div class="view overlay zoom" id="img1" >
@@ -35,7 +55,7 @@
             </a>
             <div class="col-md-6 col-sm-12"></div>
 
-            <input type="hidden" name="imagem" id="imagem" value="" class="form-control mt-2" >
+            <input type="hidden" name="imagem" id="imagem" value="" class="form-control mt-2">
             <input type="hidden" name="perfil" value="1" class="form-control mt-2" placeholder="Foto" >
 
             <input type="submit" value="Cadastrar" class="btn-block btn-primary rounded mt-2">

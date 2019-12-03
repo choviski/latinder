@@ -69,7 +69,7 @@
                class="border mt-2" src="../../../<?php echo e($animal->imagem); ?>"width="150px"><br>
 
             <label  for="descricao">Descrição:</label>
-            <textarea class="form-control" id="descricao" rows="3" name="descricao" ><?php echo e($animal->descricao); ?></textarea>
+            <textarea class="form-control" id="descricao" rows="3" name="descricao" required><?php echo e($animal->descricao); ?></textarea>
 
 
             <label  for="raca">Raça:</label>

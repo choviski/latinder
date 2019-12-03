@@ -9,7 +9,7 @@ class Usuario extends Model
 {
     protected $table ="usuarios";
 
-    protected $fillable = ['nome','login','email','senha','imagem','perfil'];
+    protected $fillable = ['nome','login','email','senha','imagem','perfil','perguntaSecreta','resposta'];
     use SoftDeletes;
     public function animal(){
         return $this->belongsToMany('App\Animais', 'publicacaos', 'id_usuario', 'id_animal');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Animal;
 use App\Publicacao;
+use App\Racas;
 use App\Usuario;
 use DateTime;
 use Illuminate\Http\Request;
@@ -12,19 +13,19 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     function getAllUserMonths(){
-    $usuario_meses_array = array();
-    $datas_usuarios = Usuario::orderBy('created_at', 'ASC')->pluck('created_at');
-    $datas_usuarios = json_decode($datas_usuarios);
-    if (!empty($datas_usuarios)) {
-        foreach ($datas_usuarios as $unf_datas) {
-            $datas = new DateTime($unf_datas);
-            $mes_numero = $datas->format('m');
-            $mes_nome = $datas->format('M');
-            $usuario_meses_array[$mes_numero] = $mes_nome;
+        $usuario_meses_array = array();
+        $datas_usuarios = Usuario::orderBy('created_at', 'ASC')->pluck('created_at');
+        $datas_usuarios = json_decode($datas_usuarios);
+        if (!empty($datas_usuarios)) {
+            foreach ($datas_usuarios as $unf_datas) {
+                $datas = new DateTime($unf_datas);
+                $mes_numero = $datas->format('m');
+                $mes_nome = $datas->format('M');
+                $usuario_meses_array[$mes_numero] = $mes_nome;
+            }
+            return ($usuario_meses_array);
         }
-        return ($usuario_meses_array);
     }
-}
 
     function getMonthlyUserCount($mes)
     {
@@ -114,6 +115,8 @@ class DashboardController extends Controller
                 array_push($meses_nome_animal_array, $mes_nome);
             }
         }
+        $racas=Racas::all();
+        $usuario = session()->get("Usuario");
         $monthly_data_array = array(
             'animais_vacinados' => Animal::where('vacinacao','=','sim')->get()->count(),
             'animais_nao_vacinados' => Animal::where('vacinacao','=','nao')->get()->count(),
@@ -139,20 +142,23 @@ class DashboardController extends Controller
             'animais_grandes' => Animal::where('porte','=','grande')->get()->count(),
             'animais_cachorro' =>DB::table('animals')->join('raca','animals.id_raca','=','raca.id')->join('especies','raca.id_especie','=','especies.id')->where('especies.id','=',1)->get()->count(),
             'animais_gato'=>DB::table('animals')->join('raca','animals.id_raca','=','raca.id')->join('especies','raca.id_especie','=','especies.id')->where('especies.id','=',2)->get()->count(),
+            'total_publicacao' => Publicacao::count(),
+            'meses_publicacao' => $meses_publicacao_array,
             /*----------------------*/
             'meses_usuarios' => $meses_nome__usuario_array,
-            'meses_publicacao' => $meses_publicacao_array,
             'meses_animal' => $meses_nome_animal_array,
             'usuarios' => $monthly_user_count_array,
             'publicacao' => $monthly_publicacao_count_array,
             'animais' => $monthly_animal_count_array,
             'total_usuarios' => Usuario::count(),
             'total_animais' => Animal::count(),
-            'total_publicacao' => Publicacao::count(),
+
+
+
 
         );
-        return view('/dashboard')->with(['dados' => $monthly_data_array]);
-        }
+        return view('/dashboard')->with(['dados' => $monthly_data_array,"racas"=>$racas,"usuario"=>$usuario]);
+    }
 
 
 }

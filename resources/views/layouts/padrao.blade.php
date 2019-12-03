@@ -87,7 +87,7 @@
             <form class="form-inline" method="post" action="{{route("filtro")}}">
                 @csrf
                 <label for="raca"  class="mr-2">Raça</label>
-                <select id="raca" name="raca" class="form-control d-inline mr-2">
+                <select  name="raca" class="form-control d-inline mr-2">
                     <option value="0">Qualquer raça</option>
                     @foreach ($racas as $raca)
                         <option value="{{$raca->id}}">{{$raca->nome}}</option>

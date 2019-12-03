@@ -9,7 +9,7 @@ function testeConexao(){
     try {
         DB::connection()->getPdo();
     } catch (\Exception $e) {
-       return abort("404");
+       return die("Alguma coisa inesperada aconteceu com nosso servidor, por favor tente mais tarde");
     }
 }
 }
